@@ -1,7 +1,7 @@
 #include "Decoder.h"
-#include "../Memory/Memory.h"
+#include "../VirtualMachine/VirtualMachine.h"
 
-void (*instructionsCallback[64])(Instruction_t, Memory_t) = {
+void (*instructionsCallback[64])(Instruction_t, VirtualMachine &) = {
     // 0
     arithmetic,
     // 1
@@ -132,7 +132,7 @@ void (*instructionsCallback[64])(Instruction_t, Memory_t) = {
     0x0};
 
 void (*getInstructionCallback(Instruction_t instruction))(Instruction_t,
-                                                          Memory_t) {
+                                                          VirtualMachine &) {
   u_int32_t opCode = instruction >> 26;
 
   return instructionsCallback[opCode];

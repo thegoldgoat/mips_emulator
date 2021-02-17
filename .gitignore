@@ -1,3 +1,4 @@
 build
+xcodebuild
 .cache
 CMakeLists.txt.user

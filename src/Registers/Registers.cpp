@@ -5,7 +5,7 @@
 void Registers_t::write(u_int8_t offset, u_int32_t value) {
 
 #ifdef REGISTERS_PROTECTION
-  assert(offset >= REGISTER_FILE_SIZE);
+  assert(offset < REGISTER_FILE_SIZE);
 #endif
 
   registerFile[offset] = value;
@@ -14,7 +14,7 @@ void Registers_t::write(u_int8_t offset, u_int32_t value) {
 u_int32_t Registers_t::read(u_int8_t offset) {
 
 #ifdef REGISTERS_PROTECTION
-  assert(offset >= REGISTER_FILE_SIZE);
+  assert(offset < REGISTER_FILE_SIZE);
 #endif
 
   return registerFile[offset];

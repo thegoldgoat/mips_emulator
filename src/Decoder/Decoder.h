@@ -1,6 +1,6 @@
 #pragma once
 
 #include "../Istructions/callbacks.h"
-#include "../Memory/Memory.h"
+#include "../VirtualMachine/VirtualMachine.h"
 
-void (*getInstructionCallback(Instruction_t))(Instruction_t, Memory_t);
+void (*getInstructionCallback(Instruction_t))(Instruction_t, VirtualMachine &);

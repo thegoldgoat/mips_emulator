@@ -1,9 +1,12 @@
 #include "Memory.h"
 
 #include <assert.h>
+#include <stdio.h>
 #include <sys/mman.h>
 
 Memory_t::Memory_t(u_int32_t sizeInByte) {
+  printf("memory mapping\n");
+
   memory = (char *)mmap(nullptr, sizeInByte, PROT_READ | PROT_WRITE,
                         MAP_ANON | MAP_PRIVATE, -1, 0);
   assert(memory);
@@ -11,7 +14,10 @@ Memory_t::Memory_t(u_int32_t sizeInByte) {
   size = sizeInByte;
 }
 
-Memory_t::~Memory_t() { munmap(memory, size); }
+Memory_t::~Memory_t() {
+  printf("memory unmapping\n");
+  munmap(memory, size);
+}
 
 unsigned char Memory_t::readByte(u_int32_t offsetInByte) {
 
