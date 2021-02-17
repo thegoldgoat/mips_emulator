@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Decoder.h"
 
 void (*instructionsCallback[64])(Instruction_t) = {
