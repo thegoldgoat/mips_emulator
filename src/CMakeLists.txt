@@ -7,6 +7,8 @@ add_executable(mips_emulator main.cpp)
 add_library(Decoder STATIC Instructions/Decoder.cpp)
 add_library(BaseInstructions STATIC Instructions/Base/callbacks.cpp)
 add_library(ArithmeticsInstructions STATIC Instructions/Arithmetics/callbacks.cpp)
+add_library(Instruction STATIC Instructions/Types/Instruction.cpp)
+add_library(R_Instruction STATIC Instructions/Types/R_Instruction.cpp)
 
 add_library(Memory STATIC Memory/Memory.cpp)
 add_library(Registers STATIC Registers/Registers.cpp)
@@ -16,6 +18,8 @@ target_link_libraries(mips_emulator
   Decoder
   BaseInstructions
   ArithmeticsInstructions
+  Instruction
+  R_Instruction
   Memory
   Registers
 )

@@ -1,4 +1,5 @@
 #include "Decoder.h"
+#include "Types/R_Instruction.h"
 
 void (*instructionsCallback[64])(Instruction_t, VirtualMachine &) = {
     // 0
@@ -132,12 +133,10 @@ void (*instructionsCallback[64])(Instruction_t, VirtualMachine &) = {
 
 void (*getInstructionCallback(Instruction_t instruction))(Instruction_t,
                                                           VirtualMachine &) {
-  u_int32_t opCode = instruction >> 26;
-
-  return instructionsCallback[opCode];
+  return instructionsCallback[instruction.opCode];
 }
 
-void (*arithmeticsCallbacks[64])(Instruction_t, VirtualMachine &) = {
+void (*arithmeticsCallbacks[64])(R_Instruction_t, VirtualMachine &) = {
     // 0
     nop,
     // 1
@@ -269,9 +268,9 @@ void (*arithmeticsCallbacks[64])(Instruction_t, VirtualMachine &) = {
 };
 
 void (*getArithmeticInstructionCallback(Instruction_t instruction))(
-    Instruction_t, VirtualMachine &) {
-    // Get first 6 bit only
-  u_int32_t opCode = instruction & 0x0000003f;
+    R_Instruction_t, VirtualMachine &) {
+  // Get first 6 bit only
+  u_int32_t opCode = instruction.opCode & 0x0000003f;
 
   return arithmeticsCallbacks[opCode];
 }

@@ -4,32 +4,103 @@
 #include <stdio.h>
 #endif
 
-void add(Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("nop\n");
-#endif
-}
-void addu(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void sub(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void subu(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void mult(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void multu(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void div(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void divu(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void slt(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void sltu(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void andCallback(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void orCallback(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void norCallback(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void xorCallback(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void jr(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void jalr(Instruction_t, VirtualMachine &) { printf("test\n"); }
-
-void nop(Instruction_t, VirtualMachine &) {
+void add(R_Instruction_t, VirtualMachine &) {
 #ifdef PRINT_DEBUG
   printf("nop\n");
 #endif
 }
 
-void mfhi(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void mflo(Instruction_t, VirtualMachine &) { printf("test\n"); }
+void addu(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+
+void sub(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+void subu(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+void mult(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+void multu(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+void div(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+void divu(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+void slt(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+void sltu(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+void andCallback(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+void orCallback(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+void norCallback(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+void xorCallback(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+void jr(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+void jalr(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+
+void nop(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("nop\n");
+#endif
+}
+
+void mfhi(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
+
+void mflo(R_Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("test\n");
+#endif
+}
