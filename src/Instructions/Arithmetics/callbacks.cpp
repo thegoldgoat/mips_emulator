@@ -1,106 +1,173 @@
 #include "callbacks.h"
+#include <assert.h>
+#include <stdint.h>
 
 #ifdef PRINT_DEBUG
 #include <stdio.h>
 #endif
 
-void add(R_Instruction_t, VirtualMachine &) {
+void add(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("add\n");
+#endif
+
+  vm.registers.write(instruction.rd, vm.registers.read(instruction.rs) +
+                                         vm.registers.read(instruction.rt));
+
+  // TODO: Check overflow and throw exception
+}
+
+void addu(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("addu\n");
+#endif
+
+  vm.registers.write(instruction.rd, vm.registers.read(instruction.rs) +
+                                         vm.registers.read(instruction.rt));
+}
+
+void sub(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("sub\n");
+#endif
+
+  vm.registers.write(instruction.rd, vm.registers.read(instruction.rs) -
+                                         vm.registers.read(instruction.rt));
+
+  // TODO: Check overflow and throw exception
+}
+void subu(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("subu\n");
+#endif
+
+  vm.registers.write(instruction.rd, vm.registers.read(instruction.rs) -
+                                         vm.registers.read(instruction.rt));
+}
+void mult(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("mult\n");
+#endif
+
+  // TODO
+  assert(1);
+}
+void multu(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("multu\n");
+#endif
+
+  // TODO
+  assert(1);
+}
+void div(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("div\n");
+#endif
+
+  // TODO
+  assert(1);
+}
+void divu(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("divu\n");
+#endif
+
+  // TODO
+  assert(1);
+}
+void slt(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("slt\n");
+#endif
+
+  // Need to cast the values into signed integers
+  int32_t first = (int32_t)vm.registers.read(instruction.rs);
+  int32_t second = (int32_t)vm.registers.read(instruction.rt);
+
+  vm.registers.write(instruction.rd, (first < second) ? 1 : 0);
+}
+void sltu(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("sltu\n");
+#endif
+
+  u_int32_t first = vm.registers.read(instruction.rs);
+  u_int32_t second = vm.registers.read(instruction.rt);
+
+  vm.registers.write(instruction.rd, (first < second) ? 1 : 0);
+}
+void andCallback(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("and\n");
+#endif
+
+  vm.registers.write(instruction.rd, vm.registers.read(instruction.rs) &
+                                         vm.registers.read(instruction.rt));
+}
+void orCallback(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("or\n");
+#endif
+
+  vm.registers.write(instruction.rd, vm.registers.read(instruction.rs) |
+                                         vm.registers.read(instruction.rt));
+}
+void norCallback(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("nor\n");
+#endif
+
+  vm.registers.write(
+      instruction.rd,
+
+      ~(vm.registers.read(instruction.rs) | vm.registers.read(instruction.rt)));
+}
+void xorCallback(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("xor\n");
+#endif
+
+  vm.registers.write(instruction.rd, vm.registers.read(instruction.rs) ^
+                                         vm.registers.read(instruction.rt));
+}
+void jr(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("jr\n");
+#endif
+
+  // TODO
+  assert(1);
+}
+void jalr(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("jalr\n");
+#endif
+
+  // TODO
+  assert(1);
+}
+
+void nop(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
   printf("nop\n");
 #endif
 }
 
-void addu(R_Instruction_t, VirtualMachine &) {
+void mfhi(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("test\n");
+  printf("mfhi\n");
 #endif
+
+  // TODO
+  assert(1);
 }
 
-void sub(R_Instruction_t, VirtualMachine &) {
+void mflo(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("test\n");
+  printf("mflo\n");
 #endif
-}
-void subu(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
-void mult(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
-void multu(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
-void div(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
-void divu(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
-void slt(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
-void sltu(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
-void andCallback(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
-void orCallback(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
-void norCallback(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
-void xorCallback(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
-void jr(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
-void jalr(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
 
-void nop(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("nop\n");
-#endif
-}
-
-void mfhi(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
-}
-
-void mflo(R_Instruction_t, VirtualMachine &) {
-#ifdef PRINT_DEBUG
-  printf("test\n");
-#endif
+  // TODO
+  assert(1);
 }

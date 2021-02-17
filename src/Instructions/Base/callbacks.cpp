@@ -18,6 +18,8 @@ void arithmetic(Instruction_t instruction, VirtualMachine &vm) {
   assert(arithmeticInstruction);
 
   arithmeticInstruction(R_Instruction_t(instruction.opCode), vm);
+
+  vm.registers.incrementPC();
 }
 
 // ADD immediate
