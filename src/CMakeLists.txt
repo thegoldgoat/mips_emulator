@@ -4,15 +4,18 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(mips_emulator main.cpp)
 
-add_library(Decoder STATIC Decoder/Decoder.cpp)
-add_library(Istructions STATIC Istructions/callbacks.cpp)
+add_library(Decoder STATIC Instructions/Decoder.cpp)
+add_library(BaseInstructions STATIC Instructions/Base/callbacks.cpp)
+add_library(ArithmeticsInstructions STATIC Instructions/Arithmetics/callbacks.cpp)
+
 add_library(Memory STATIC Memory/Memory.cpp)
 add_library(Registers STATIC Registers/Registers.cpp)
 
 # internal libraries
 target_link_libraries(mips_emulator
   Decoder
-  Istructions
+  BaseInstructions
+  ArithmeticsInstructions
   Memory
   Registers
 )

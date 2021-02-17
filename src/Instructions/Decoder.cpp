@@ -1,5 +1,4 @@
 #include "Decoder.h"
-#include "../VirtualMachine/VirtualMachine.h"
 
 void (*instructionsCallback[64])(Instruction_t, VirtualMachine &) = {
     // 0
@@ -136,4 +135,142 @@ void (*getInstructionCallback(Instruction_t instruction))(Instruction_t,
   u_int32_t opCode = instruction >> 26;
 
   return instructionsCallback[opCode];
+}
+
+void (*arithmeticsCallbacks[64])(Instruction_t, VirtualMachine &) = {
+    // 0
+    nop,
+    // 1
+    0x0,
+    // 2
+    0x0,
+    // 3
+    0x0,
+    // 4
+    0x0,
+    // 5
+    0x0,
+    // 6
+    0x0,
+    // 7
+    0x0,
+    // 8
+    jr,
+    // 9
+    jalr,
+    // 10
+    0x0,
+    // 11
+    0x0,
+    // 12
+    0x0,
+    // 13
+    0x0,
+    // 14
+    0x0,
+    // 15
+    0x0,
+    // 16
+    mfhi,
+    // 17
+    0x0,
+    // 18
+    mflo,
+    // 19
+    0x0,
+    // 20
+    0x0,
+    // 21
+    0x0,
+    // 22
+    0x0,
+    // 23
+    0x0,
+    // 24
+    mult,
+    // 25
+    multu,
+    // 26
+    div,
+    // 27
+    divu,
+    // 28
+    0x0,
+    // 29
+    0x0,
+    // 30
+    0x0,
+    // 31
+    0x0,
+    // 32
+    add,
+    // 33
+    addu,
+    // 34
+    sub,
+    // 35
+    subu,
+    // 36
+    andCallback,
+    // 37
+    orCallback,
+    // 38
+    0x0,
+    // 39
+    norCallback,
+    // 40
+    xorCallback,
+    // 41
+    0x0,
+    // 42
+    slt,
+    // 43
+    sltu,
+    // 44
+    0x0,
+    // 45
+    0x0,
+    // 46
+    0x0,
+    // 47
+    0x0,
+    // 48
+    0x0,
+    // 49
+    0x0,
+    // 50
+    0x0,
+    // 51
+    0x0,
+    // 52
+    0x0,
+    // 53
+    0x0,
+    // 54
+    0x0,
+    // 55
+    0x0,
+    // 56
+    0x0,
+    // 57
+    0x0,
+    // 58
+    0x0,
+    // 59
+    0x0,
+    // 60
+    0x0,
+    // 61
+    0x0,
+    // 62
+    0x0,
+    // 63
+    0x0,
+};
+
+void (*getArithmeticInstructionCallback(Instruction_t instruction))(
+    Instruction_t, VirtualMachine &) {
+  u_int32_t opCode = instruction >> 26;
+
+  return arithmeticsCallbacks[opCode];
 }

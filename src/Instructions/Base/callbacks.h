@@ -1,8 +1,6 @@
 #pragma once
-#include "../VirtualMachine/VirtualMachine.h"
-#include <stdint.h>
-
-typedef uint32_t Instruction_t;
+#include "../../VirtualMachine/VirtualMachine.h"
+#include "../Instruction.h"
 
 // Arithmetic and logic operations
 void arithmetic(Instruction_t, VirtualMachine &);

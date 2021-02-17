@@ -1,4 +1,4 @@
-#include "Decoder/Decoder.cpp"
+#include "Instructions/Decoder.cpp"
 #include "VirtualMachine/VirtualMachine.h"
 #include <assert.h>
 #include <stdio.h>
