@@ -1,9 +1,23 @@
 #include "callbacks.h"
+#ifdef PRINT_DEBUG
 #include <stdio.h>
+#endif
+
+#include "../Decoder.h"
+#include <assert.h>
 
 // Arithmetic and logic operations
 void arithmetic(Instruction_t instruction, VirtualMachine &vm) {
-  printf("Test\n");
+#ifdef PRINT_DEBUG
+  printf("arithmetic instruction\n");
+#endif
+  
+  auto arithmeticInstruction = getArithmeticInstructionCallback(instruction);
+  
+  // TODO: Launch exception (?)
+  assert(arithmeticInstruction);
+  
+  arithmeticInstruction(instruction, vm);
 }
 // ADD immediate
 void addi(Instruction_t instruction, VirtualMachine &vm) { printf("Test\n"); }

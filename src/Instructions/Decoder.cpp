@@ -270,7 +270,8 @@ void (*arithmeticsCallbacks[64])(Instruction_t, VirtualMachine &) = {
 
 void (*getArithmeticInstructionCallback(Instruction_t instruction))(
     Instruction_t, VirtualMachine &) {
-  u_int32_t opCode = instruction >> 26;
+    // Get first 6 bit only
+  u_int32_t opCode = instruction & 0x0000003f;
 
   return arithmeticsCallbacks[opCode];
 }

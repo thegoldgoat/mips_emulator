@@ -1,11 +1,17 @@
 #include "Memory.h"
 
 #include <assert.h>
-#include <stdio.h>
 #include <sys/mman.h>
 
+#ifdef PRINT_DEBUG
+#include <stdio.h>
+#endif
+
 Memory_t::Memory_t(u_int32_t sizeInByte) {
+
+#ifdef PRINT_DEBUG
   printf("memory mapping\n");
+#endif
 
   memory = (char *)mmap(nullptr, sizeInByte, PROT_READ | PROT_WRITE,
                         MAP_ANON | MAP_PRIVATE, -1, 0);
@@ -15,7 +21,9 @@ Memory_t::Memory_t(u_int32_t sizeInByte) {
 }
 
 Memory_t::~Memory_t() {
-  printf("memory unmapping\n");
+#ifdef PRINT_DEBUG
+  printf("memory mapping\n");
+#endif
   munmap(memory, size);
 }
 

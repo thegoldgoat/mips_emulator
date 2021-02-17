@@ -1,7 +1,14 @@
 #include "callbacks.h"
-#include <stdio.h>
 
-void add(Instruction_t, VirtualMachine &) { printf("test\n"); }
+#ifdef PRINT_DEBUG
+#include <stdio.h>
+#endif
+
+void add(Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("nop\n");
+#endif
+}
 void addu(Instruction_t, VirtualMachine &) { printf("test\n"); }
 void sub(Instruction_t, VirtualMachine &) { printf("test\n"); }
 void subu(Instruction_t, VirtualMachine &) { printf("test\n"); }
@@ -17,6 +24,12 @@ void norCallback(Instruction_t, VirtualMachine &) { printf("test\n"); }
 void xorCallback(Instruction_t, VirtualMachine &) { printf("test\n"); }
 void jr(Instruction_t, VirtualMachine &) { printf("test\n"); }
 void jalr(Instruction_t, VirtualMachine &) { printf("test\n"); }
-void nop(Instruction_t, VirtualMachine &) { printf("test\n"); }
+
+void nop(Instruction_t, VirtualMachine &) {
+#ifdef PRINT_DEBUG
+  printf("nop\n");
+#endif
+}
+
 void mfhi(Instruction_t, VirtualMachine &) { printf("test\n"); }
 void mflo(Instruction_t, VirtualMachine &) { printf("test\n"); }
