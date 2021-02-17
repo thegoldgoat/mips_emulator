@@ -7,12 +7,14 @@ add_executable(mips_emulator main.cpp)
 add_library(Decoder STATIC Decoder/Decoder.cpp)
 add_library(Istructions STATIC Istructions/callbacks.cpp)
 add_library(Memory STATIC Memory/Memory.cpp)
+add_library(Registers STATIC Registers/Registers.cpp)
 
 # internal libraries
 target_link_libraries(mips_emulator
   Decoder
   Istructions
   Memory
+  Registers
 )
 
 target_compile_features(mips_emulator PUBLIC cxx_std_17)

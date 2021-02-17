@@ -1,5 +1,6 @@
 #include "Decoder/Decoder.cpp"
 #include "Memory/Memory.h"
+#include "Registers/Registers.h"
 #include <assert.h>
 #include <stdio.h>
 

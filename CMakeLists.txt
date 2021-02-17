@@ -11,6 +11,7 @@ endif()
 
 # Debug macros
 add_definitions(-DMEMORY_PROTECTION)
+add_definitions(-DREGISTERS_PROTECTION)
 
 project(mips_emulator)
 
