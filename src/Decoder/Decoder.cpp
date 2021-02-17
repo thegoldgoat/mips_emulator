@@ -1,6 +1,7 @@
 #include "Decoder.h"
+#include "../Memory/Memory.h"
 
-void (*instructionsCallback[64])(Instruction_t) = {
+void (*instructionsCallback[64])(Instruction_t, Memory_t) = {
     // 0
     arithmetic,
     // 1
@@ -130,7 +131,8 @@ void (*instructionsCallback[64])(Instruction_t) = {
     // 63
     0x0};
 
-void (*getInstructionCallback(Instruction_t instruction))(Instruction_t) {
+void (*getInstructionCallback(Instruction_t instruction))(Instruction_t,
+                                                          Memory_t) {
   u_int32_t opCode = instruction >> 26;
 
   return instructionsCallback[opCode];

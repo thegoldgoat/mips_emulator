@@ -1,45 +1,47 @@
 #include "callbacks.h"
-#include <iostream>
+#include <stdio.h>
 
 // Arithmetic and logic operations
-void arithmetic(Instruction_t) { std::cout << "arithmetic\n"; }
+void arithmetic(Instruction_t instruction, Memory_t memory) {
+  printf("Test\n");
+}
 // ADD immediate
-void addi(Instruction_t) { std::cout << "Test\n"; }
+void addi(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // ADD immediate unsignet
-void addiu(Instruction_t) { std::cout << "Test\n"; }
+void addiu(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Set less than immediate unsigned
-void slti(Instruction_t) { std::cout << "Test\n"; }
+void slti(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // And immediate
-void sltiu(Instruction_t) { std::cout << "Test\n"; }
+void sltiu(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // And immediate
-void andi(Instruction_t) { std::cout << "Test\n"; }
+void andi(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Or immediate
-void ori(Instruction_t) { std::cout << "Test\n"; }
+void ori(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // XOR immediate
-void xori(Instruction_t) { std::cout << "Test\n"; }
+void xori(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Load Word
-void lw(Instruction_t) { std::cout << "Test\n"; }
+void lw(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Save word
-void sw(Instruction_t) { std::cout << "Test\n"; }
+void sw(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Load undigned byte
-void lbu(Instruction_t) { std::cout << "Test\n"; }
+void lbu(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Load byte
-void lb(Instruction_t) { std::cout << "Test\n"; }
+void lb(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Store Byte
-void sb(Instruction_t) { std::cout << "Test\n"; }
+void sb(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Load upper immediate
-void lui(Instruction_t) { std::cout << "Test\n"; }
+void lui(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Branch on equal
-void beq(Instruction_t) { std::cout << "Test\n"; }
+void beq(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Branch on not equal
-void bne(Instruction_t) { std::cout << "Test\n"; }
+void bne(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Branch on less than or equal zero
-void blez(Instruction_t) { std::cout << "Test\n"; }
+void blez(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Branch on greater than zero
-void bgtz(Instruction_t) { std::cout << "Test\n"; }
+void bgtz(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Branch on less than zero
-void bltz(Instruction_t) { std::cout << "Test\n"; }
+void bltz(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Jump
-void jump(Instruction_t) { std::cout << "Test\n"; }
+void jump(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
 // Jump and Link
-void jal(Instruction_t) { std::cout << "Test\n"; }
+void jal(Instruction_t instruction, Memory_t memory) { printf("Test\n"); }
