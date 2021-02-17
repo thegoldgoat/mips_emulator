@@ -2,6 +2,14 @@
 
 #include <stdint.h>
 
-typedef u_int32_t * Memory_t;
+class Memory_t {
+public:
+  uint32_t size;
 
-Memory_t initMemory(u_int32_t sizeInByte);
+  Memory_t(u_int32_t);
+
+  ~Memory_t();
+
+private:
+  uint32_t *memory = nullptr;
+};

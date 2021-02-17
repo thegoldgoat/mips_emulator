@@ -5,9 +5,7 @@
 
 int main(int argc, char **argv) {
 
-  Memory_t memory = initMemory((u_int32_t)2 * 1024 * 1024 * 1024);
-
-  printf("memory: %p\n", memory);
+  Memory_t memory = Memory_t((u_int32_t)2 * 1024 * 1024 * 1024);
 
   auto instructionCallback = getInstructionCallback(0x0);
 
