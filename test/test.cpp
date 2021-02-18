@@ -7,4 +7,6 @@ int main() {
   VirtualMachine vm = VirtualMachine(2 * 1024 * 1024 * 1024);
 
   assert(testAdd(vm));
+
+  assert(testSub(vm));
 }

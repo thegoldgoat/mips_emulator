@@ -9,6 +9,11 @@
 #define MAX_32_BIT_SIGNED (int64_t)2147483647
 #define MIN_32_BIT_SIGNED (int64_t) - 2147483648
 
+bool checkIntegerOverflow(int32_t op1, int32_t op2) {
+  int64_t result = (int64_t)op1 + op2;
+  return result > MAX_32_BIT_SIGNED || result < MIN_32_BIT_SIGNED;
+}
+
 void add(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
   printf("add\n");
@@ -17,18 +22,14 @@ void add(R_Instruction_t instruction, VirtualMachine &vm) {
   int32_t rs = vm.registers.read(instruction.rs);
   int32_t rt = vm.registers.read(instruction.rt);
 
-  vm.registers.write(instruction.rd, rs + rt);
-
-  // Check overflow and throw exception
-  int64_t result = (int64_t)rs + rt;
-
-  if (result > MAX_32_BIT_SIGNED || result < MIN_32_BIT_SIGNED) {
+  if (checkIntegerOverflow(rs, rt)) {
     // TODO: Handle exception
 #ifdef PRINT_DEBUG
     fprintf(stderr, "[add]: got overflow adding %x and %x\n", rs, rt);
 #endif
-    return;
   }
+
+  vm.registers.write(instruction.rd, rs + rt);
 }
 
 void addu(R_Instruction_t instruction, VirtualMachine &vm) {
@@ -45,10 +46,17 @@ void sub(R_Instruction_t instruction, VirtualMachine &vm) {
   printf("sub\n");
 #endif
 
-  vm.registers.write(instruction.rd, vm.registers.read(instruction.rs) -
-                                         vm.registers.read(instruction.rt));
+  int32_t rs = vm.registers.read(instruction.rs);
+  int32_t rt = -vm.registers.read(instruction.rt);
 
-  // TODO: Check overflow and throw exception
+  if (checkIntegerOverflow(rs, rt)) {
+    // TODO: Handle exception
+#ifdef PRINT_DEBUG
+    fprintf(stderr, "[sub]: got overflow adding %x and %x\n", rs, rt);
+#endif
+  }
+
+  vm.registers.write(instruction.rd, rs + rt);
 }
 void subu(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG

@@ -4,3 +4,4 @@
 #include "../../src/VirtualMachine/VirtualMachine.h"
 
 bool testAdd(VirtualMachine &vm);
+bool testSub(VirtualMachine &vm);

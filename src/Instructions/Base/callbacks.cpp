@@ -9,7 +9,7 @@
 // Arithmetic and logic operations
 void arithmetic(Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("arithmetic instruction\n");
+  printf("- arithmetic instruction\n");
 #endif
 
   R_Instruction_t r_instruction = R_Instruction_t(instruction.instruction);
