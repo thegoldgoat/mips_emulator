@@ -22,7 +22,7 @@ Memory_t::Memory_t(u_int32_t sizeInByte) {
 
 Memory_t::~Memory_t() {
 #ifdef PRINT_DEBUG
-  printf("memory mapping\n");
+  printf("memory unmapping\n");
 #endif
   munmap(memory, size);
 }

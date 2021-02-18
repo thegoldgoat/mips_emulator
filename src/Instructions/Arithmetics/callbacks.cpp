@@ -20,9 +20,13 @@ void add(R_Instruction_t instruction, VirtualMachine &vm) {
   vm.registers.write(instruction.rd, rs + rt);
 
   // Check overflow and throw exception
-  int64_t result = rs + rt;
+  int64_t result = (int64_t)rs + rt;
+
   if (result > MAX_32_BIT_SIGNED || result < MIN_32_BIT_SIGNED) {
     // TODO: Handle exception
+#ifdef PRINT_DEBUG
+    fprintf(stderr, "[add]: got overflow adding %x and %x\n", rs, rt);
+#endif
     return;
   }
 }

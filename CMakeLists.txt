@@ -17,3 +17,4 @@ add_definitions(-DPRINT_DEBUG)
 project(mips_emulator)
 
 add_subdirectory(src)
+add_subdirectory(test)
