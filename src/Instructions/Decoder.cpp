@@ -267,10 +267,7 @@ void (*arithmeticsCallbacks[64])(R_Instruction_t, VirtualMachine &) = {
     0x0,
 };
 
-void (*getArithmeticInstructionCallback(Instruction_t instruction))(
+void (*getArithmeticInstructionCallback(R_Instruction_t instruction))(
     R_Instruction_t, VirtualMachine &) {
-  // Get first 6 bit only
-  u_int32_t opCode = instruction.opCode & 0x0000003f;
-
-  return arithmeticsCallbacks[opCode];
+  return arithmeticsCallbacks[instruction.funct_code];
 }

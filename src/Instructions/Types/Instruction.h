@@ -8,6 +8,5 @@ public:
 
   Instruction_t(u_int32_t);
 
-protected:
   u_int32_t instruction;
 };

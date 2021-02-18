@@ -12,12 +12,14 @@ void arithmetic(Instruction_t instruction, VirtualMachine &vm) {
   printf("arithmetic instruction\n");
 #endif
 
-  auto arithmeticInstruction = getArithmeticInstructionCallback(instruction);
+  R_Instruction_t r_instruction = R_Instruction_t(instruction.instruction);
+
+  auto arithmeticInstruction = getArithmeticInstructionCallback(r_instruction);
 
   // TODO: Launch exception (?)
   assert(arithmeticInstruction);
 
-  arithmeticInstruction(R_Instruction_t(instruction.opCode), vm);
+  arithmeticInstruction(r_instruction, vm);
 
   vm.registers.incrementPC();
 }

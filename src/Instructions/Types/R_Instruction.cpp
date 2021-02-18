@@ -3,14 +3,20 @@
 R_Instruction_t::R_Instruction_t(u_int32_t instruction)
     : Instruction_t(instruction) {
 
-  rs = instruction & 0x3e00000;
-  rs = rs >> 21;
+  u_int32_t temp = instruction & 0x3e00000;
 
-  rt = instruction & 0x1f0000;
-  rt = rt >> 16;
+  temp >>= 21;
+  rs = temp;
 
-  rd = instruction & 0xf800;
-  rd = rd >> 11;
+  temp = instruction & 0x1f0000;
+  temp >>= 16;
+
+  rt = temp;
+
+  temp = instruction & 0xf800;
+  temp >>= 11;
+
+  rd = temp;
 
   funct_code = instruction & 0x3f;
 }

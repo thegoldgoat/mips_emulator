@@ -9,5 +9,5 @@
 
 void (*getInstructionCallback(Instruction_t))(Instruction_t, VirtualMachine &);
 
-void (*getArithmeticInstructionCallback(Instruction_t instruction))(
+void (*getArithmeticInstructionCallback(R_Instruction_t instruction))(
     R_Instruction_t, VirtualMachine &);

@@ -6,15 +6,25 @@
 #include <stdio.h>
 #endif
 
+#define MAX_32_BIT_SIGNED (int64_t)2147483647
+#define MIN_32_BIT_SIGNED (int64_t) - 2147483648
+
 void add(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
   printf("add\n");
 #endif
 
-  vm.registers.write(instruction.rd, vm.registers.read(instruction.rs) +
-                                         vm.registers.read(instruction.rt));
+  int32_t rs = vm.registers.read(instruction.rs);
+  int32_t rt = vm.registers.read(instruction.rt);
 
-  // TODO: Check overflow and throw exception
+  vm.registers.write(instruction.rd, rs + rt);
+
+  // Check overflow and throw exception
+  int64_t result = rs + rt;
+  if (result > MAX_32_BIT_SIGNED || result < MIN_32_BIT_SIGNED) {
+    // TODO: Handle exception
+    return;
+  }
 }
 
 void addu(R_Instruction_t instruction, VirtualMachine &vm) {
