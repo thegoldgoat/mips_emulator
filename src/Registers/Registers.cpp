@@ -51,3 +51,8 @@ void Registers_t::branchJump(int16_t jumpOffset) {
   // PC <-- [PC] + 4 + ([I15]14 || [I15..0] || 02)
   programCounter += 4 + 4 * jumpOffset;
 }
+
+void Registers_t::writeProduct(u_int64_t result) {
+  lo = result & 0x00000000ffffffff;
+  hi = result >> 32;
+}

@@ -58,6 +58,7 @@ void sub(R_Instruction_t instruction, VirtualMachine &vm) {
 
   vm.registers.write(instruction.rd, rs + rt);
 }
+
 void subu(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
   printf("subu\n");
@@ -66,13 +67,18 @@ void subu(R_Instruction_t instruction, VirtualMachine &vm) {
   vm.registers.write(instruction.rd, vm.registers.read(instruction.rs) -
                                          vm.registers.read(instruction.rt));
 }
+
 void mult(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
   printf("mult\n");
 #endif
 
-  // TODO
-  assert(1);
+  int32_t rs = vm.registers.read(instruction.rs);
+  int32_t rt = vm.registers.read(instruction.rt);
+
+  int64_t result = rs * rt;
+
+  vm.registers.writeProduct(result);
 }
 void multu(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG

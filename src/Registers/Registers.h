@@ -11,6 +11,7 @@ public:
   void incrementPC();
   void jumpPC(u_int32_t instruction);
   void branchJump(int16_t jumpOffset);
+  void writeProduct(u_int64_t result);
 
 private:
   u_int32_t registerFile[REGISTER_FILE_SIZE] = {0};
