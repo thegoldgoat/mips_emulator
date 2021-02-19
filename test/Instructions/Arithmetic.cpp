@@ -116,8 +116,21 @@ void testMult(VirtualMachine &vm) {
   assert(vm.registers.read(4) == 200);
 
   // * Only in hi multiplication
+  vm.registers.write(1, 0x7fffffff);
+  vm.registers.write(2, 2);
+
+  multCallback(Instruction_t(multCode), vm);
+
+  // Read hi and lo
+  mfhiCallback(mfhiCode, vm);
+  mfloCallback(mfloCode, vm);
+
+  assert(vm.registers.read(3) == 0x0);
+  assert(vm.registers.read(4) == 0xfffffffe);
+
+  // * Negative multiplication
   vm.registers.write(1, 0x80000000);
-  vm.registers.write(2, 2);
+  vm.registers.write(2, 4);
 
   multCallback(Instruction_t(multCode), vm);
 
@@ -125,19 +138,6 @@ void testMult(VirtualMachine &vm) {
   mfhiCallback(mfhiCode, vm);
   mfloCallback(mfloCode, vm);
 
-  assert(vm.registers.read(3) == 0x1);
+  assert(vm.registers.read(3) == 0xfffffffe);
   assert(vm.registers.read(4) == 0x0);
-
-  // * Both hi and lo multiplication
-  vm.registers.write(1, 0x80010000);
-  vm.registers.write(2, 2);
-
-  multCallback(Instruction_t(multCode), vm);
-
-  // Read hi and lo
-  mfhiCallback(mfhiCode, vm);
-  mfloCallback(mfloCode, vm);
-
-  assert(vm.registers.read(3) == 0x1);
-  assert(vm.registers.read(4) == 0x00020000);
 }
