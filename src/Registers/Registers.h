@@ -13,6 +13,9 @@ public:
   void branchJump(int16_t jumpOffset);
   void writeProduct(uint64_t result);
 
+  uint32_t getHi();
+  uint32_t getLo();
+
 private:
   uint32_t registerFile[REGISTER_FILE_SIZE] = {0};
 

@@ -84,4 +84,60 @@ void testSub(VirtualMachine &vm) {
   assert(vm.registers.read(3) == 0x7fffffff);
 }
 
-void testMult(VirtualMachine &vm) {}
+void testMult(VirtualMachine &vm) {
+
+  // $1 * $2
+  uint32_t multCode = 0x220018;
+  // $3 = $hi
+  uint32_t mfhiCode = 0x1810;
+  // $4 = $lo
+  uint32_t mfloCode = 0x2012;
+
+  auto multCallback = getInstructionCallback(multCode);
+  assert(multCallback);
+
+  auto mfhiCallback = getInstructionCallback(mfhiCode);
+  assert(mfhiCallback);
+
+  auto mfloCallback = getInstructionCallback(mfloCode);
+  assert(mfloCallback);
+
+  // * Standard multiplication
+  vm.registers.write(1, 10);
+  vm.registers.write(2, 20);
+
+  multCallback(Instruction_t(multCode), vm);
+
+  // Read hi and lo
+  mfhiCallback(mfhiCode, vm);
+  mfloCallback(mfloCode, vm);
+
+  assert(vm.registers.read(3) == 0x0);
+  assert(vm.registers.read(4) == 200);
+
+  // * Only in hi multiplication
+  vm.registers.write(1, 0x80000000);
+  vm.registers.write(2, 2);
+
+  multCallback(Instruction_t(multCode), vm);
+
+  // Read hi and lo
+  mfhiCallback(mfhiCode, vm);
+  mfloCallback(mfloCode, vm);
+
+  assert(vm.registers.read(3) == 0x1);
+  assert(vm.registers.read(4) == 0x0);
+
+  // * Both hi and lo multiplication
+  vm.registers.write(1, 0x80010000);
+  vm.registers.write(2, 2);
+
+  multCallback(Instruction_t(multCode), vm);
+
+  // Read hi and lo
+  mfhiCallback(mfhiCode, vm);
+  mfloCallback(mfloCode, vm);
+
+  assert(vm.registers.read(3) == 0x1);
+  assert(vm.registers.read(4) == 0x00020000);
+}

@@ -56,3 +56,6 @@ void Registers_t::writeProduct(uint64_t result) {
   lo = result & 0x00000000ffffffff;
   hi = result >> 32;
 }
+
+uint32_t Registers_t::getHi() { return hi; }
+uint32_t Registers_t::getLo() { return lo; }

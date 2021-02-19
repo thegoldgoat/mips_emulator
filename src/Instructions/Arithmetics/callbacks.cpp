@@ -73,8 +73,8 @@ void mult(R_Instruction_t instruction, VirtualMachine &vm) {
   printf("mult\n");
 #endif
 
-  int32_t rs = vm.registers.read(instruction.rs);
-  int32_t rt = vm.registers.read(instruction.rt);
+  int64_t rs = vm.registers.read(instruction.rs);
+  int64_t rt = vm.registers.read(instruction.rt);
 
   int64_t result = rs * rt;
 
