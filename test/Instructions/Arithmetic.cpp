@@ -140,4 +140,19 @@ void testMult(VirtualMachine &vm) {
 
   assert(vm.registers.read(3) == 0xfffffffe);
   assert(vm.registers.read(4) == 0x0);
+
+  uint32_t multuCode = 0x220019;
+  auto multuCallback = getInstructionCallback(multuCode);
+
+  vm.registers.write(1, 0x80000000);
+  vm.registers.write(2, 4);
+
+  multuCallback(Instruction_t(multuCode), vm);
+
+  // Read hi and lo
+  mfhiCallback(mfhiCode, vm);
+  mfloCallback(mfloCode, vm);
+
+  assert(vm.registers.read(3) == 0x2);
+  assert(vm.registers.read(4) == 0x0);
 }

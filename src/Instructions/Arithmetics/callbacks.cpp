@@ -85,8 +85,12 @@ void multu(R_Instruction_t instruction, VirtualMachine &vm) {
   printf("multu\n");
 #endif
 
-  // TODO
-  assert(1);
+  uint32_t rs = vm.registers.read(instruction.rs);
+  uint32_t rt = vm.registers.read(instruction.rt);
+
+  uint64_t result = (uint64_t)rs * rt;
+
+  vm.registers.writeProduct(result);
 }
 void div(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
@@ -94,7 +98,7 @@ void div(R_Instruction_t instruction, VirtualMachine &vm) {
 #endif
 
   // TODO
-  assert(1);
+  assert(0);
 }
 void divu(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
@@ -102,7 +106,7 @@ void divu(R_Instruction_t instruction, VirtualMachine &vm) {
 #endif
 
   // TODO
-  assert(1);
+  assert(0);
 }
 void slt(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
@@ -165,7 +169,7 @@ void jr(R_Instruction_t instruction, VirtualMachine &vm) {
 #endif
 
   // TODO
-  assert(1);
+  assert(0);
 }
 void jalr(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
@@ -173,7 +177,7 @@ void jalr(R_Instruction_t instruction, VirtualMachine &vm) {
 #endif
 
   // TODO
-  assert(1);
+  assert(0);
 }
 
 void nop(R_Instruction_t instruction, VirtualMachine &vm) {
