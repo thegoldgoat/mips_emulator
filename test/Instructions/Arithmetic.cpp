@@ -49,7 +49,7 @@ void testSub(VirtualMachine &vm) {
   vm.registers.write(1, 200);
   vm.registers.write(2, 100);
 
-  // $3 = $1 + $2
+  // $3 = $1 - $2
   uint32_t subCode = 0x221822;
 
   auto instructionCallback = getInstructionCallback(subCode);
@@ -83,3 +83,5 @@ void testSub(VirtualMachine &vm) {
 
   assert(vm.registers.read(3) == 0x7fffffff);
 }
+
+void testMult(VirtualMachine &vm) {}

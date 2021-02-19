@@ -5,3 +5,4 @@
 
 void testAdd(VirtualMachine &vm);
 void testSub(VirtualMachine &vm);
+void testMult(VirtualMachine &vm);
