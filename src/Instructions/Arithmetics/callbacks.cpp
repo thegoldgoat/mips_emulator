@@ -187,8 +187,7 @@ void mfhi(R_Instruction_t instruction, VirtualMachine &vm) {
   printf("mfhi\n");
 #endif
 
-  // TODO
-  assert(1);
+  vm.registers.write(instruction.rd, vm.registers.getHi());
 }
 
 void mflo(R_Instruction_t instruction, VirtualMachine &vm) {
@@ -196,6 +195,5 @@ void mflo(R_Instruction_t instruction, VirtualMachine &vm) {
   printf("mflo\n");
 #endif
 
-  // TODO
-  assert(1);
+  vm.registers.write(instruction.rd, vm.registers.getLo());
 }
