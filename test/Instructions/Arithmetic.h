@@ -3,5 +3,5 @@
 #include "../../src/Instructions/Decoder.h"
 #include "../../src/VirtualMachine/VirtualMachine.h"
 
-bool testAdd(VirtualMachine &vm);
-bool testSub(VirtualMachine &vm);
+void testAdd(VirtualMachine &vm);
+void testSub(VirtualMachine &vm);

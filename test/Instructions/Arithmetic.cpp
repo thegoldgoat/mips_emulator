@@ -2,7 +2,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-bool testAdd(VirtualMachine &vm) {
+void testAdd(VirtualMachine &vm) {
 
   // Simple add
   vm.registers.write(1, 100);
@@ -16,8 +16,7 @@ bool testAdd(VirtualMachine &vm) {
 
   instructionCallback(addCode, vm);
 
-  if (vm.registers.read(3) != 300)
-    return false;
+  assert(vm.registers.read(3) == 300);
 
   // Overflow add for negatives
   vm.registers.write(1, -2147483648);
@@ -25,8 +24,7 @@ bool testAdd(VirtualMachine &vm) {
 
   instructionCallback(addCode, vm);
 
-  if (vm.registers.read(3) != 0x7fffffff)
-    return false;
+  assert(vm.registers.read(3) == 0x7fffffff);
 
   // Overflow add for positives
   vm.registers.write(1, 2147483647);
@@ -34,8 +32,7 @@ bool testAdd(VirtualMachine &vm) {
 
   instructionCallback(addCode, vm);
 
-  if (vm.registers.read(3) != 0x80000000)
-    return false;
+  assert(vm.registers.read(3) == 0x80000000);
 
   // Just a last one legal no-overflow add
   vm.registers.write(1, 2147483646);
@@ -43,13 +40,10 @@ bool testAdd(VirtualMachine &vm) {
 
   instructionCallback(addCode, vm);
 
-  if (vm.registers.read(3) != 0x7fffffff)
-    return false;
-
-  return true;
+  assert(vm.registers.read(3) == 0x7fffffff);
 }
 
-bool testSub(VirtualMachine &vm) {
+void testSub(VirtualMachine &vm) {
 
   // Simple sub
   vm.registers.write(1, 200);
@@ -63,8 +57,7 @@ bool testSub(VirtualMachine &vm) {
 
   instructionCallback(subCode, vm);
 
-  if (vm.registers.read(3) != 100)
-    return false;
+  assert(vm.registers.read(3) == 100);
 
   // Overflow sub for negatives
   vm.registers.write(1, -2147483648);
@@ -72,8 +65,7 @@ bool testSub(VirtualMachine &vm) {
 
   instructionCallback(subCode, vm);
 
-  if (vm.registers.read(3) != 0x7fffffff)
-    return false;
+  assert(vm.registers.read(3) == 0x7fffffff);
 
   // Overflow sub for positives
   vm.registers.write(1, 2147483647);
@@ -81,8 +73,7 @@ bool testSub(VirtualMachine &vm) {
 
   instructionCallback(subCode, vm);
 
-  if (vm.registers.read(3) != 0x80000000)
-    return false;
+  assert(vm.registers.read(3) == 0x80000000);
 
   // Just a last one legal no-overflow sub
   vm.registers.write(1, 2147483646);
@@ -90,8 +81,5 @@ bool testSub(VirtualMachine &vm) {
 
   instructionCallback(subCode, vm);
 
-  if (vm.registers.read(3) != 0x7fffffff)
-    return false;
-
-  return true;
+  assert(vm.registers.read(3) == 0x7fffffff);
 }
