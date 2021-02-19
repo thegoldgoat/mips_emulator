@@ -9,7 +9,7 @@ bool testAdd(VirtualMachine &vm) {
   vm.registers.write(2, 200);
 
   // $3 = $1 + $2
-  u_int32_t addCode = 0x221820;
+  uint32_t addCode = 0x221820;
 
   auto instructionCallback = getInstructionCallback(addCode);
   assert(instructionCallback);
@@ -56,7 +56,7 @@ bool testSub(VirtualMachine &vm) {
   vm.registers.write(2, 100);
 
   // $3 = $1 + $2
-  u_int32_t subCode = 0x221822;
+  uint32_t subCode = 0x221822;
 
   auto instructionCallback = getInstructionCallback(subCode);
   assert(instructionCallback);

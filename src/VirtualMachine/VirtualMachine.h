@@ -8,5 +8,5 @@ public:
   Memory_t memory;
   Registers_t registers;
 
-  VirtualMachine(u_int32_t memorySize) : memory(Memory_t(memorySize)) {}
+  VirtualMachine(uint32_t memorySize) : memory(Memory_t(memorySize)) {}
 };

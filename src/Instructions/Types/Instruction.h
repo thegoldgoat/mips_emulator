@@ -6,7 +6,7 @@ class Instruction_t {
 public:
   uint8_t opCode;
 
-  Instruction_t(u_int32_t);
+  Instruction_t(uint32_t);
 
-  u_int32_t instruction;
+  uint32_t instruction;
 };

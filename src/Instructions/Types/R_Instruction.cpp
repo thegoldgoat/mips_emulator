@@ -1,9 +1,9 @@
 #include "R_Instruction.h"
 
-R_Instruction_t::R_Instruction_t(u_int32_t instruction)
+R_Instruction_t::R_Instruction_t(uint32_t instruction)
     : Instruction_t(instruction) {
 
-  u_int32_t temp = instruction & 0x3e00000;
+  uint32_t temp = instruction & 0x3e00000;
 
   temp >>= 21;
   rs = temp;

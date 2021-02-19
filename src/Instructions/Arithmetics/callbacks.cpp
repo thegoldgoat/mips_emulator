@@ -120,8 +120,8 @@ void sltu(R_Instruction_t instruction, VirtualMachine &vm) {
   printf("sltu\n");
 #endif
 
-  u_int32_t first = vm.registers.read(instruction.rs);
-  u_int32_t second = vm.registers.read(instruction.rt);
+  uint32_t first = vm.registers.read(instruction.rs);
+  uint32_t second = vm.registers.read(instruction.rt);
 
   vm.registers.write(instruction.rd, (first < second) ? 1 : 0);
 }

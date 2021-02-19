@@ -6,14 +6,14 @@ class Memory_t {
 public:
   uint32_t size;
 
-  Memory_t(u_int32_t);
+  Memory_t(uint32_t);
   ~Memory_t();
 
-  u_int32_t readWord(u_int32_t offsetInByte);
-  void writeWord(u_int32_t offsetInByte, u_int32_t word);
+  uint32_t readWord(uint32_t offsetInByte);
+  void writeWord(uint32_t offsetInByte, uint32_t word);
 
-  unsigned char readByte(u_int32_t offsetInByte);
-  void writeByte(u_int32_t offsetInByte, unsigned char byte);
+  unsigned char readByte(uint32_t offsetInByte);
+  void writeByte(uint32_t offsetInByte, unsigned char byte);
 
 private:
   char *memory = nullptr;

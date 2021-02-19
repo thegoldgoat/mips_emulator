@@ -2,7 +2,7 @@
 
 #include <assert.h>
 
-void Registers_t::write(u_int8_t offset, u_int32_t value) {
+void Registers_t::write(uint8_t offset, uint32_t value) {
 
 #ifdef REGISTERS_PROTECTION
   assert(offset < REGISTER_FILE_SIZE);
@@ -15,7 +15,7 @@ void Registers_t::write(u_int8_t offset, u_int32_t value) {
   registerFile[offset] = value;
 }
 
-u_int32_t Registers_t::read(u_int8_t offset) {
+uint32_t Registers_t::read(uint8_t offset) {
 
 #ifdef REGISTERS_PROTECTION
   assert(offset < REGISTER_FILE_SIZE);
@@ -26,10 +26,10 @@ u_int32_t Registers_t::read(u_int8_t offset) {
 
 void Registers_t::incrementPC() { programCounter += 4; }
 
-void Registers_t::jumpPC(u_int32_t instruction) {
+void Registers_t::jumpPC(uint32_t instruction) {
   // PC <-- [PC31..28] || [I25..0] || 00
 
-  u_int32_t newValue = 0x0;
+  uint32_t newValue = 0x0;
 
   // Remove op-code from instruction
   instruction &= 0x03ffffff;
@@ -52,7 +52,7 @@ void Registers_t::branchJump(int16_t jumpOffset) {
   programCounter += 4 + 4 * jumpOffset;
 }
 
-void Registers_t::writeProduct(u_int64_t result) {
+void Registers_t::writeProduct(uint64_t result) {
   lo = result & 0x00000000ffffffff;
   hi = result >> 32;
 }
