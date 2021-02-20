@@ -1,19 +1,11 @@
 #include "callbacks.h"
+#include "../Decoder.h"
 #include <assert.h>
-#include <bits/stdint-intn.h>
 #include <stdint.h>
 
 #ifdef PRINT_DEBUG
 #include <stdio.h>
 #endif
-
-#define MAX_32_BIT_SIGNED (int64_t)2147483647
-#define MIN_32_BIT_SIGNED (int64_t) - 2147483648
-
-bool checkIntegerOverflow(int32_t op1, int32_t op2) {
-  int64_t result = (int64_t)op1 + op2;
-  return result > MAX_32_BIT_SIGNED || result < MIN_32_BIT_SIGNED;
-}
 
 void add(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG

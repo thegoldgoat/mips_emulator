@@ -9,6 +9,7 @@ add_library(BaseInstructions STATIC Instructions/Base/callbacks.cpp)
 add_library(ArithmeticsInstructions STATIC Instructions/Arithmetics/callbacks.cpp)
 add_library(Instruction STATIC Instructions/Types/Instruction.cpp)
 add_library(R_Instruction STATIC Instructions/Types/R_Instruction.cpp)
+add_library(I_Instruction STATIC Instructions/Types/I_Instruction.cpp)
 
 add_library(Memory STATIC Memory/Memory.cpp)
 add_library(Registers STATIC Registers/Registers.cpp)
@@ -20,6 +21,7 @@ target_link_libraries(mips_emulator
   ArithmeticsInstructions
   Instruction
   R_Instruction
+  I_Instruction
   Memory
   Registers
 )

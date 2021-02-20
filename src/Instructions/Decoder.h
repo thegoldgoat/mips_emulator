@@ -14,3 +14,5 @@ void (*getArithmeticInstructionCallback(R_Instruction_t instruction))(
     R_Instruction_t, VirtualMachine &);
 
 bool shouldIncrementPc(R_Instruction_t instruction);
+
+bool checkIntegerOverflow(int32_t op1, int32_t op2);

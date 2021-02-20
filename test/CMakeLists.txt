@@ -18,6 +18,7 @@ target_link_libraries(mips_emulator_test
   ArithmeticsInstructions
   Instruction
   R_Instruction
+  I_Instruction
   Memory
   Registers
 )
