@@ -156,3 +156,35 @@ void testMult(VirtualMachine &vm) {
   assert(vm.registers.read(3) == 0x2);
   assert(vm.registers.read(4) == 0x0);
 }
+
+void testDiv(VirtualMachine &vm) {
+  // $1 / $2
+  auto divCode = 2228250;
+  auto divInst = Instruction_t(divCode);
+
+  auto divCallback = getInstructionCallback(divCode);
+
+  vm.registers.write(1, 10);
+  vm.registers.write(2, 2);
+
+  divCallback(divInst, vm);
+
+  assert(vm.registers.getLo() == 5);
+  assert(vm.registers.getHi() == 0);
+
+  vm.registers.write(1, 10);
+  vm.registers.write(2, 3);
+
+  divCallback(divInst, vm);
+
+  assert(vm.registers.getLo() == 3);
+  assert(vm.registers.getHi() == 1);
+
+  vm.registers.write(1, 0xf0000000);
+  vm.registers.write(2, 2);
+
+  divCallback(divInst, vm);
+
+  assert(vm.registers.getLo() == 0xf8000000);
+  assert(vm.registers.getHi() == 0);
+}

@@ -1,4 +1,5 @@
 #pragma once
+#include <bits/stdint-uintn.h>
 #include <stdint.h>
 
 #define REGISTER_FILE_SIZE 32
@@ -12,6 +13,7 @@ public:
   void jumpPC(uint32_t instruction);
   void branchJump(int16_t jumpOffset);
   void writeProduct(uint64_t result);
+  void writeDivision(uint32_t result, uint32_t remainder);
 
   uint32_t getHi();
   uint32_t getLo();

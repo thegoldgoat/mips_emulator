@@ -9,4 +9,5 @@ int main() {
   testAdd(vm);
   testSub(vm);
   testMult(vm);
+  testDiv(vm);
 }

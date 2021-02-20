@@ -57,5 +57,10 @@ void Registers_t::writeProduct(uint64_t result) {
   hi = result >> 32;
 }
 
+void Registers_t::writeDivision(uint32_t result, uint32_t remainder) {
+  lo = result;
+  hi = remainder;
+}
+
 uint32_t Registers_t::getHi() { return hi; }
 uint32_t Registers_t::getLo() { return lo; }

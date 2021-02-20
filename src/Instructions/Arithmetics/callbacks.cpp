@@ -1,5 +1,6 @@
 #include "callbacks.h"
 #include <assert.h>
+#include <bits/stdint-intn.h>
 #include <stdint.h>
 
 #ifdef PRINT_DEBUG
@@ -97,16 +98,36 @@ void div(R_Instruction_t instruction, VirtualMachine &vm) {
   printf("div\n");
 #endif
 
-  // TODO
-  assert(0);
+  int32_t rs = vm.registers.read(instruction.rs);
+  int32_t rt = vm.registers.read(instruction.rt);
+
+  if (rt == 0) {
+// TODO: Handle exception
+#ifdef PRINT_DEBUG
+    fprintf(stderr, "Dividing by zero!!\n");
+#endif
+    return;
+  }
+
+  vm.registers.writeDivision(rs / rt, rs % rt);
 }
 void divu(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
   printf("divu\n");
 #endif
 
-  // TODO
-  assert(0);
+  uint32_t rs = vm.registers.read(instruction.rs);
+  uint32_t rt = vm.registers.read(instruction.rt);
+
+  if (rt == 0) {
+// TODO: Handle exception
+#ifdef PRINT_DEBUG
+    fprintf(stderr, "Dividing by zero!!\n");
+#endif
+    return;
+  }
+
+  vm.registers.writeDivision(rs / rt, rs % rt);
 }
 void slt(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
