@@ -21,7 +21,8 @@ void arithmetic(Instruction_t instruction, VirtualMachine &vm) {
 
   arithmeticInstruction(r_instruction, vm);
 
-  vm.registers.incrementPC();
+  if (shouldIncrementPc(r_instruction))
+    vm.registers.incrementPC();
 }
 
 // ADD immediate

@@ -52,6 +52,14 @@ void Registers_t::branchJump(int16_t jumpOffset) {
   programCounter += 4 + 4 * jumpOffset;
 }
 
+void Registers_t::jumpRegister(uint8_t regNumber) {
+#ifdef REGISTERS_PROTECTION
+  assert(regNumber < REGISTER_FILE_SIZE);
+#endif
+
+  programCounter = registerFile[regNumber];
+}
+
 void Registers_t::writeProduct(uint64_t result) {
   lo = result & 0x00000000ffffffff;
   hi = result >> 32;
@@ -64,3 +72,4 @@ void Registers_t::writeDivision(uint32_t result, uint32_t remainder) {
 
 uint32_t Registers_t::getHi() { return hi; }
 uint32_t Registers_t::getLo() { return lo; }
+uint32_t Registers_t::getPc() { return programCounter; }

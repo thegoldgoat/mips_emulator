@@ -189,16 +189,16 @@ void jr(R_Instruction_t instruction, VirtualMachine &vm) {
   printf("jr\n");
 #endif
 
-  // TODO
-  assert(0);
+  vm.registers.jumpRegister(instruction.rs);
 }
 void jalr(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
   printf("jalr\n");
 #endif
 
-  // TODO
-  assert(0);
+  vm.registers.write(instruction.rd, vm.registers.getPc() + 4);
+
+  vm.registers.jumpRegister(instruction.rs);
 }
 
 void nop(R_Instruction_t instruction, VirtualMachine &vm) {

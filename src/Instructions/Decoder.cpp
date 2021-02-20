@@ -271,3 +271,13 @@ void (*getArithmeticInstructionCallback(R_Instruction_t instruction))(
     R_Instruction_t, VirtualMachine &) {
   return arithmeticsCallbacks[instruction.funct_code];
 }
+
+bool shouldIncrementPc(R_Instruction_t instruction) {
+  switch (instruction.funct_code) {
+  case 8:
+  case 9:
+    return false;
+  default:
+    return true;
+  }
+}
