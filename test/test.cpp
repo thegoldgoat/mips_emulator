@@ -1,4 +1,5 @@
 #include "Instructions/Arithmetic.h"
+#include "Instructions/Memory.h"
 
 #include <assert.h>
 #include <stdio.h>
@@ -10,4 +11,6 @@ int main() {
   testSub(vm);
   testMult(vm);
   testDiv(vm);
+  testLw(vm);
+  testSw(vm);
 }

@@ -1,4 +1,5 @@
 #include "callbacks.h"
+#include <bits/stdint-uintn.h>
 #include <stdint.h>
 #ifdef PRINT_DEBUG
 #include <stdio.h>
@@ -137,8 +138,13 @@ void xori(Instruction_t instruction, VirtualMachine &vm) {
 // Load Word
 void lw(Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("- Test\n");
+  printf("- lw\n");
 #endif
+  I_Instuction_t i_instruction = I_Instuction_t(instruction.instruction);
+
+  vm.registers.write(i_instruction.rt,
+                     vm.memory.readWord(i_instruction.immediate +
+                                        vm.registers.read(i_instruction.rs)));
 
   vm.registers.incrementPC();
 }
@@ -146,8 +152,13 @@ void lw(Instruction_t instruction, VirtualMachine &vm) {
 // Save word
 void sw(Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("- Test\n");
+  printf("- sw\n");
 #endif
+  I_Instuction_t i_instruction = I_Instuction_t(instruction.instruction);
+
+  vm.memory.writeWord(i_instruction.immediate +
+                          vm.registers.read(i_instruction.rs),
+                      vm.registers.read(i_instruction.rt));
 
   vm.registers.incrementPC();
 }
