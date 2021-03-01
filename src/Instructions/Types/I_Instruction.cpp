@@ -15,5 +15,7 @@ I_Instuction_t::I_Instuction_t(uint32_t instruction)
 
   rt = temp;
 
-  immediate = (int32_t)instruction & 0x0000ffff;
+  temp = instruction & 0x0000ffff;
+
+  immediate = (int32_t)((int16_t)temp);
 }
