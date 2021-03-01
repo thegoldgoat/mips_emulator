@@ -1,5 +1,8 @@
 #include "VirtualMachine.h"
+#include "../Instructions/Decoder.h"
+#include "../Instructions/Types/Instruction.h"
 
+#include <assert.h>
 #include <fstream>
 
 #define TEXT_SEGMENT_START 0x00400000
@@ -34,5 +37,34 @@ void VirtualMachine::loadExecutable(std::string path) {
     inputFile.read((char *)&intBuffer, sizeof(intBuffer));
     memory.writeWord(currentAddress, intBuffer);
     currentAddress += 4;
+  }
+}
+
+#define GLOBAL_POINTER 28
+
+void VirtualMachine::runExecutable() {
+
+  // Prepare registers:
+
+  // Program Counter
+  registers.jumpPC(entryPointAddress / 4);
+
+  // Global pointer
+  registers.write(GLOBAL_POINTER, 0x10008000);
+
+  // Start loop:
+  uint32_t fetchedInstruction;
+  while (true) {
+    // Fetch Instruction
+    fetchedInstruction = memory.readWord(registers.getPc());
+
+    // Decode
+    Instruction_t decodedInstruction(fetchedInstruction);
+    auto instructionCallback = getInstructionCallback(decodedInstruction);
+
+    assert(instructionCallback);
+
+    // Execute and write results
+    instructionCallback(decodedInstruction, *this);
   }
 }

@@ -19,6 +19,8 @@ public:
 
   void loadExecutable(std::string path);
 
+  void runExecutable();
+
 private:
   uint32_t entryPointAddress;
 };
