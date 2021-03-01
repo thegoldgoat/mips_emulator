@@ -41,6 +41,8 @@ void VirtualMachine::loadExecutable(std::string path) {
 }
 
 #define GLOBAL_POINTER 28
+#define STACK_POINTER 29
+#define FRAME_POINTER 30
 
 void VirtualMachine::runExecutable() {
 
@@ -52,7 +54,9 @@ void VirtualMachine::runExecutable() {
   // Global pointer
   registers.write(GLOBAL_POINTER, 0x10008000);
 
-  // TODO: Setup stack pointer and frame pointer
+  // Stack pointer & Frame pointer
+  registers.write(STACK_POINTER, memory.size - 4);
+  registers.write(FRAME_POINTER, memory.size - 4);
 
   // Start loop:
   uint32_t fetchedInstruction;
