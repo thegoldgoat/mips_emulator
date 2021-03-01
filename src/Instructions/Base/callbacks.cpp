@@ -237,28 +237,52 @@ void bne(Instruction_t instruction, VirtualMachine &vm) {
 // Branch on less than or equal zero
 void blez(Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("- Test\n");
+  printf("- blez\n");
 #endif
+
+  I_Instuction_t i_instruction = I_Instuction_t(instruction.instruction);
+
+  if (vm.registers.read(i_instruction.rs) <= 0) {
+    vm.registers.branchJump(i_instruction.immediate);
+  } else {
+    vm.registers.incrementPC();
+  }
 }
 
 // Branch on greater than zero
 void bgtz(Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("- Test\n");
+  printf("- bgtz\n");
 #endif
+
+  I_Instuction_t i_instruction = I_Instuction_t(instruction.instruction);
+
+  if (vm.registers.read(i_instruction.rs) > 0) {
+    vm.registers.branchJump(i_instruction.immediate);
+  } else {
+    vm.registers.incrementPC();
+  }
 }
 
 // Branch on less than zero
 void bltz(Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("- Test\n");
+  printf("- bltz\n");
 #endif
+
+  I_Instuction_t i_instruction = I_Instuction_t(instruction.instruction);
+
+  if (vm.registers.read(i_instruction.rs) < 0) {
+    vm.registers.branchJump(i_instruction.immediate);
+  } else {
+    vm.registers.incrementPC();
+  }
 }
 
 // Jump
 void jump(Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("- Test\n");
+  printf("- jump\n");
 #endif
 }
 
