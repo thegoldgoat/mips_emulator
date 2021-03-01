@@ -2,6 +2,13 @@
 #include "../Memory/Memory.h"
 #include "../Registers/Registers.h"
 #include <stdint.h>
+#include <string>
+
+struct ExeHeader {
+  uint32_t textSegmentSize;
+  uint32_t dataSegmentSize;
+  uint32_t entryPointOffset;
+};
 
 class VirtualMachine {
 public:
@@ -9,4 +16,9 @@ public:
   Registers_t registers;
 
   VirtualMachine(uint32_t memorySize) : memory(Memory_t(memorySize)) {}
+
+  void loadExecutable(std::string path);
+
+private:
+  uint32_t entryPointAddress;
 };

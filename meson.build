@@ -9,6 +9,7 @@ executable('emulator', 'src/main.cpp',                 \
     'src/Instructions/Types/I_Instruction.cpp',        \
     'src/Memory/Memory.cpp',                           \
     'src/Registers/Registers.cpp' ,                    \
+    'src/VirtualMachine/VirtualMachine.cpp' ,          \
     install: true,
     cpp_args : '-std=c++11'
 )
