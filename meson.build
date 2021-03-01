@@ -11,7 +11,12 @@ executable('emulator', 'src/main.cpp',                 \
     'src/Registers/Registers.cpp' ,                    \
     'src/VirtualMachine/VirtualMachine.cpp' ,          \
     install: true,
-    cpp_args : '-std=c++11'
+    cpp_args : [
+        '-std=c++11',
+        '-DMEMORY_PROTECTION',
+        '-DREGISTERS_PROTECTION',
+        '-DPRINT_DEBUG'
+    ]
 )
 
 executable('mytest', 'test/test.cpp',                  \
@@ -27,5 +32,10 @@ executable('mytest', 'test/test.cpp',                  \
     'test/Instructions/Arithmetic.cpp',                \
     'test/Instructions/Memory.cpp',                    \
     install: true,
-    cpp_args : '-std=c++11'
+    cpp_args : [
+        '-std=c++11',
+        '-DMEMORY_PROTECTION',
+        '-DREGISTERS_PROTECTION',
+        '-DPRINT_DEBUG'
+    ]
 )
