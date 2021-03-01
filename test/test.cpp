@@ -11,6 +11,7 @@ int main() {
   testSub(vm);
   testMult(vm);
   testDiv(vm);
+  testLui(vm);
   testLw(vm);
   testSw(vm);
 }

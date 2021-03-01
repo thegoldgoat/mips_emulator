@@ -193,8 +193,12 @@ void sb(Instruction_t instruction, VirtualMachine &vm) {
 // Load upper immediate
 void lui(Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("- Test\n");
+  printf("- lui\n");
 #endif
+
+  I_Instuction_t i_instruction = I_Instuction_t(instruction.instruction);
+
+  vm.registers.write(i_instruction.rt, (i_instruction.immediate << 16));
 
   vm.registers.incrementPC();
 }

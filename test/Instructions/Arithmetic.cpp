@@ -188,3 +188,14 @@ void testDiv(VirtualMachine &vm) {
   assert(vm.registers.getLo() == 0xf8000000);
   assert(vm.registers.getHi() == 0);
 }
+
+void testLui(VirtualMachine &vm) {
+  auto luiCode = 0x3c01f0f0;
+  auto luiInst = Instruction_t(luiCode);
+
+  auto luiCallback = getInstructionCallback(luiCode);
+
+  luiCallback(luiInst, vm);
+
+  assert(vm.registers.read(1) == 0xf0f00000);
+}
