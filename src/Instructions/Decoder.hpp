@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Arithmetics/callbacks.h"
-#include "Base/callbacks.h"
+#include "Arithmetics/callbacks.hpp"
+#include "Base/callbacks.hpp"
 
-#include "Types/Instruction.h"
-#include "Types/R_Instruction.h"
+#include "Types/Instruction.hpp"
+#include "Types/R_Instruction.hpp"
 
-#include "../VirtualMachine/VirtualMachine.h"
+#include "../VirtualMachine/VirtualMachine.hpp"
 
 void (*getInstructionCallback(Instruction_t))(Instruction_t, VirtualMachine &);
 

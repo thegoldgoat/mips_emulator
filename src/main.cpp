@@ -1,5 +1,5 @@
-#include "Instructions/Decoder.h"
-#include "VirtualMachine/VirtualMachine.h"
+#include "Instructions/Decoder.hpp"
+#include "VirtualMachine/VirtualMachine.hpp"
 #include <assert.h>
 #include <stdio.h>
 

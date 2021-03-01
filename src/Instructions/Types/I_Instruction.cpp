@@ -1,5 +1,5 @@
-#include "I_Instruction.h"
-#include "Instruction.h"
+#include "I_Instruction.hpp"
+#include "Instruction.hpp"
 #include <stdint.h>
 
 I_Instuction_t::I_Instuction_t(uint32_t instruction)

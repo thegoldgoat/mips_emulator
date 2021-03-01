@@ -1,4 +1,4 @@
-#include "R_Instruction.h"
+#include "R_Instruction.hpp"
 
 R_Instruction_t::R_Instruction_t(uint32_t instruction)
     : Instruction_t(instruction) {

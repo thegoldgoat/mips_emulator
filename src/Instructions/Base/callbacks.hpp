@@ -1,6 +1,6 @@
 #pragma once
-#include "../../VirtualMachine/VirtualMachine.h"
-#include "../Types/Instruction.h"
+#include "../../VirtualMachine/VirtualMachine.hpp"
+#include "../Types/Instruction.hpp"
 
 // Arithmetic and logic operations
 void arithmetic(Instruction_t, VirtualMachine &);

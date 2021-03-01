@@ -1,5 +1,5 @@
-#include "Decoder.h"
-#include "Types/R_Instruction.h"
+#include "Decoder.hpp"
+#include "Types/R_Instruction.hpp"
 
 void (*instructionsCallback[64])(Instruction_t, VirtualMachine &) = {
     // 0

@@ -1,5 +1,5 @@
 #pragma once
-#include "Instruction.h"
+#include "Instruction.hpp"
 
 class R_Instruction_t : public Instruction_t {
 public:

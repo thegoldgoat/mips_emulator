@@ -1,6 +1,6 @@
 #pragma once
-#include "../Memory/Memory.h"
-#include "../Registers/Registers.h"
+#include "../Memory/Memory.hpp"
+#include "../Registers/Registers.hpp"
 #include <stdint.h>
 #include <string>
 

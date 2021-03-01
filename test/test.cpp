@@ -1,6 +1,6 @@
-#include "Instructions/Arithmetic.h"
-#include "Instructions/Jump.h"
-#include "Instructions/Memory.h"
+#include "Instructions/Arithmetic.hpp"
+#include "Instructions/Jump.hpp"
+#include "Instructions/Memory.hpp"
 
 int main() {
   VirtualMachine vm = VirtualMachine(2 * 1024 * 1024 * 1024);

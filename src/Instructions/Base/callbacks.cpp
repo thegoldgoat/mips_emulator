@@ -1,14 +1,14 @@
-#include "callbacks.h"
+#include "callbacks.hpp"
 #include <bits/stdint-uintn.h>
 #include <stdint.h>
 #ifdef PRINT_DEBUG
 #include <stdio.h>
 #endif
 
-#include "../Decoder.h"
+#include "../Decoder.hpp"
 #include <assert.h>
 
-#include "../Types/I_Instruction.h"
+#include "../Types/I_Instruction.hpp"
 
 // Arithmetic and logic operations
 void arithmetic(Instruction_t instruction, VirtualMachine &vm) {

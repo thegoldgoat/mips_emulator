@@ -1,6 +1,6 @@
-#include "VirtualMachine.h"
-#include "../Instructions/Decoder.h"
-#include "../Instructions/Types/Instruction.h"
+#include "VirtualMachine.hpp"
+#include "../Instructions/Decoder.hpp"
+#include "../Instructions/Types/Instruction.hpp"
 
 #include <assert.h>
 #include <fstream>

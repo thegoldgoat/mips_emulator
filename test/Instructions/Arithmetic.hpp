@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../src/Instructions/Decoder.h"
-#include "../../src/VirtualMachine/VirtualMachine.h"
+#include "../../src/Instructions/Decoder.hpp"
+#include "../../src/VirtualMachine/VirtualMachine.hpp"
 
 void testAdd(VirtualMachine &vm);
 void testSub(VirtualMachine &vm);

@@ -1,5 +1,5 @@
-#include "callbacks.h"
-#include "../Decoder.h"
+#include "callbacks.hpp"
+#include "../Decoder.hpp"
 #include <assert.h>
 #include <stdint.h>
 

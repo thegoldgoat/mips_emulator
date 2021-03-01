@@ -1,6 +1,6 @@
 #pragma once
-#include "../../Instructions/Types/R_Instruction.h"
-#include "../../VirtualMachine/VirtualMachine.h"
+#include "../../Instructions/Types/R_Instruction.hpp"
+#include "../../VirtualMachine/VirtualMachine.hpp"
 
 void add(R_Instruction_t, VirtualMachine &);
 void addu(R_Instruction_t, VirtualMachine &);

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Instruction.h"
+#include "Instruction.hpp"
 #include <stdint.h>
 
 class I_Instuction_t : public Instruction_t {
