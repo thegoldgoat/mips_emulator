@@ -1,8 +1,6 @@
 #include "Instructions/Arithmetic.h"
+#include "Instructions/Jump.h"
 #include "Instructions/Memory.h"
-
-#include <assert.h>
-#include <stdio.h>
 
 int main() {
   VirtualMachine vm = VirtualMachine(2 * 1024 * 1024 * 1024);
@@ -14,4 +12,6 @@ int main() {
   testLui(vm);
   testLw(vm);
   testSw(vm);
+  testBeq(vm);
+  testBne(vm);
 }

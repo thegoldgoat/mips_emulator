@@ -31,6 +31,7 @@ executable('mytest', 'test/test.cpp',                  \
 
     'test/Instructions/Arithmetic.cpp',                \
     'test/Instructions/Memory.cpp',                    \
+    'test/Instructions/Jump.cpp',                      \
     install: true,
     cpp_args : [
         '-std=c++11',

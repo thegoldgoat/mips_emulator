@@ -206,15 +206,32 @@ void lui(Instruction_t instruction, VirtualMachine &vm) {
 // Branch on equal
 void beq(Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("- Test\n");
+  printf("- beq\n");
 #endif
+  I_Instuction_t i_instruction = I_Instuction_t(instruction.instruction);
+
+  if (vm.registers.read(i_instruction.rs) ==
+      vm.registers.read(i_instruction.rt)) {
+    vm.registers.branchJump(i_instruction.immediate);
+  } else {
+    vm.registers.incrementPC();
+  }
 }
 
 // Branch on not equal
 void bne(Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("- Test\n");
+  printf("- bne\n");
 #endif
+
+  I_Instuction_t i_instruction = I_Instuction_t(instruction.instruction);
+
+  if (vm.registers.read(i_instruction.rs) !=
+      vm.registers.read(i_instruction.rt)) {
+    vm.registers.branchJump(i_instruction.immediate);
+  } else {
+    vm.registers.incrementPC();
+  }
 }
 
 // Branch on less than or equal zero
