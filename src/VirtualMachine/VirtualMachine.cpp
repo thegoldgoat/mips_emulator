@@ -52,6 +52,8 @@ void VirtualMachine::runExecutable() {
   // Global pointer
   registers.write(GLOBAL_POINTER, 0x10008000);
 
+  // TODO: Setup stack pointer and frame pointer
+
   // Start loop:
   uint32_t fetchedInstruction;
   while (true) {
