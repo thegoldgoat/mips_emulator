@@ -9,6 +9,7 @@
 #include <assert.h>
 
 #include "../Types/I_Instruction.hpp"
+#include "../Types/J_Instruction.hpp"
 
 // Arithmetic and logic operations
 void arithmetic(Instruction_t instruction, VirtualMachine &vm) {
@@ -284,11 +285,22 @@ void jump(Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
   printf("- jump\n");
 #endif
+
+  J_Instuction_t j_instruction(instruction.instruction);
+
+  vm.registers.jumpPC(j_instruction.immediate);
 }
+
+#define JUMP_REGISTER 31
 
 // Jump and Link
 void jal(Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
   printf("- Test\n");
 #endif
+  J_Instuction_t j_instruction(instruction.instruction);
+
+  vm.registers.write(JUMP_REGISTER, vm.registers.getPc() + 4);
+
+  vm.registers.jumpPC(j_instruction.immediate);
 }
