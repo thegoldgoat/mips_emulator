@@ -138,11 +138,11 @@ void (*getInstructionCallback(Instruction_t instruction))(Instruction_t,
 
 void (*arithmeticsCallbacks[64])(R_Instruction_t, VirtualMachine &) = {
     // 0
-    nop,
+    sll,
     // 1
     0x0,
     // 2
-    0x0,
+    srl,
     // 3
     0x0,
     // 4

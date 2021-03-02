@@ -10,4 +10,6 @@ public:
   uint8_t rd;
 
   uint8_t funct_code;
+
+  uint32_t getShiftAmount();
 };

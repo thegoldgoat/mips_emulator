@@ -194,10 +194,24 @@ void jalr(R_Instruction_t instruction, VirtualMachine &vm) {
   vm.registers.jumpRegister(instruction.rs);
 }
 
-void nop(R_Instruction_t instruction, VirtualMachine &vm) {
+void sll(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("nop\n");
+  printf("sll\n");
 #endif
+
+  vm.registers.write(instruction.rd, vm.registers.read(instruction.rt)
+                                         << instruction.getShiftAmount());
+
+  vm.registers.incrementPC();
+}
+
+void srl(R_Instruction_t instruction, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("srl\n");
+#endif
+
+  vm.registers.write(instruction.rd, vm.registers.read(instruction.rt) >>
+                                         instruction.getShiftAmount());
 
   vm.registers.incrementPC();
 }

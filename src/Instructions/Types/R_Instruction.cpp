@@ -20,3 +20,7 @@ R_Instruction_t::R_Instruction_t(uint32_t instruction)
 
   funct_code = instruction & 0x3f;
 }
+
+uint32_t R_Instruction_t::getShiftAmount() {
+  return (this->instruction > 6) & 0x3f;
+}
