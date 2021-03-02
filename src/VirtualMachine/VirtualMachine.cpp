@@ -60,7 +60,7 @@ void VirtualMachine::runExecutable() {
 
   // Start loop:
   uint32_t fetchedInstruction;
-  while (true) {
+  while (continueExecution) {
     // Fetch Instruction
     fetchedInstruction = memory.readWord(registers.getPc());
 
@@ -74,3 +74,5 @@ void VirtualMachine::runExecutable() {
     instructionCallback(decodedInstruction, *this);
   }
 }
+
+void VirtualMachine::stopExecution() { continueExecution = false; }

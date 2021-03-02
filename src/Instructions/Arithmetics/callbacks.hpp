@@ -21,3 +21,4 @@ void jalr(R_Instruction_t, VirtualMachine &);
 void nop(R_Instruction_t, VirtualMachine &);
 void mfhi(R_Instruction_t, VirtualMachine &);
 void mflo(R_Instruction_t, VirtualMachine &);
+void syscall(R_Instruction_t, VirtualMachine &);

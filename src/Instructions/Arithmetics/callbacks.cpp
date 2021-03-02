@@ -1,6 +1,7 @@
 #include "callbacks.hpp"
 #include "../Decoder.hpp"
 #include <assert.h>
+#include <stdexcept>
 #include <stdint.h>
 
 #ifdef PRINT_DEBUG
@@ -197,6 +198,8 @@ void nop(R_Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
   printf("nop\n");
 #endif
+
+  vm.registers.incrementPC();
 }
 
 void mfhi(R_Instruction_t instruction, VirtualMachine &vm) {
@@ -205,6 +208,8 @@ void mfhi(R_Instruction_t instruction, VirtualMachine &vm) {
 #endif
 
   vm.registers.write(instruction.rd, vm.registers.getHi());
+
+  vm.registers.incrementPC();
 }
 
 void mflo(R_Instruction_t instruction, VirtualMachine &vm) {
@@ -213,4 +218,27 @@ void mflo(R_Instruction_t instruction, VirtualMachine &vm) {
 #endif
 
   vm.registers.write(instruction.rd, vm.registers.getLo());
+
+  vm.registers.incrementPC();
+}
+
+#define SYSCALL_NUMBER_REGISTER 2
+
+void syscall(R_Instruction_t, VirtualMachine &vm) {
+#ifdef PRINT_DEBUG
+  printf("syscall\n");
+#endif
+
+  uint32_t syscallNumber = vm.registers.read(SYSCALL_NUMBER_REGISTER);
+
+  switch (syscallNumber) {
+  case 10:
+    vm.stopExecution();
+    break;
+  default:
+    throw std::runtime_error("Unimplemented syscall number: " +
+                             std::to_string(syscallNumber));
+  }
+
+  vm.registers.incrementPC();
 }

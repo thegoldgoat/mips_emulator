@@ -21,6 +21,10 @@ public:
 
   void runExecutable();
 
+  void stopExecution();
+
 private:
+  bool continueExecution = true;
+
   uint32_t entryPointAddress;
 };

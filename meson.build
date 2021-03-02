@@ -30,6 +30,7 @@ executable('mytest', 'test/test.cpp',                  \
     'src/Instructions/Types/J_Instruction.cpp',        \
     'src/Memory/Memory.cpp',                           \
     'src/Registers/Registers.cpp',                     \
+    'src/VirtualMachine/VirtualMachine.cpp' ,          \
 
     'test/Instructions/Arithmetic.cpp',                \
     'test/Instructions/Memory.cpp',                    \

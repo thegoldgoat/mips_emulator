@@ -162,7 +162,7 @@ void (*arithmeticsCallbacks[64])(R_Instruction_t, VirtualMachine &) = {
     // 11
     0x0,
     // 12
-    0x0,
+    syscall,
     // 13
     0x0,
     // 14

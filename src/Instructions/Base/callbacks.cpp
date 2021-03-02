@@ -296,7 +296,7 @@ void jump(Instruction_t instruction, VirtualMachine &vm) {
 // Jump and Link
 void jal(Instruction_t instruction, VirtualMachine &vm) {
 #ifdef PRINT_DEBUG
-  printf("- Test\n");
+  printf("- jal\n");
 #endif
   J_Instuction_t j_instruction(instruction.instruction);
 
