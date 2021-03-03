@@ -22,5 +22,5 @@ R_Instruction_t::R_Instruction_t(uint32_t instruction)
 }
 
 uint32_t R_Instruction_t::getShiftAmount() {
-  return (this->instruction > 6) & 0x3f;
+  return (this->instruction >> 6) & 0x1f;
 }

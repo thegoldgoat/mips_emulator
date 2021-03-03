@@ -201,8 +201,6 @@ void sll(R_Instruction_t instruction, VirtualMachine &vm) {
 
   vm.registers.write(instruction.rd, vm.registers.read(instruction.rt)
                                          << instruction.getShiftAmount());
-
-  vm.registers.incrementPC();
 }
 
 void srl(R_Instruction_t instruction, VirtualMachine &vm) {
@@ -212,8 +210,6 @@ void srl(R_Instruction_t instruction, VirtualMachine &vm) {
 
   vm.registers.write(instruction.rd, vm.registers.read(instruction.rt) >>
                                          instruction.getShiftAmount());
-
-  vm.registers.incrementPC();
 }
 
 void mfhi(R_Instruction_t instruction, VirtualMachine &vm) {
@@ -222,8 +218,6 @@ void mfhi(R_Instruction_t instruction, VirtualMachine &vm) {
 #endif
 
   vm.registers.write(instruction.rd, vm.registers.getHi());
-
-  vm.registers.incrementPC();
 }
 
 void mflo(R_Instruction_t instruction, VirtualMachine &vm) {
@@ -232,8 +226,6 @@ void mflo(R_Instruction_t instruction, VirtualMachine &vm) {
 #endif
 
   vm.registers.write(instruction.rd, vm.registers.getLo());
-
-  vm.registers.incrementPC();
 }
 
 #define SYSCALL_NUMBER_REGISTER 2
@@ -253,6 +245,4 @@ void syscall(R_Instruction_t, VirtualMachine &vm) {
     throw std::runtime_error("Unimplemented syscall number: " +
                              std::to_string(syscallNumber));
   }
-
-  vm.registers.incrementPC();
 }
