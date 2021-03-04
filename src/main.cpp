@@ -2,11 +2,14 @@
 #include "VirtualMachine/VirtualMachine.hpp"
 #include <assert.h>
 #include <stdio.h>
+#include <string.h>
+
+#define PRINT_USAGE
 
 int main(int argc, char **argv) {
 
-  if (argc != 2) {
-    printf("Usage: %s <input_file>\n", argv[0]);
+  if (argc < 2 || argc > 3 || (argc == 3 && strcmp(argv[2], "--debug") != 0)) {
+    printf("Usage: %s <input_file> [--debug]\n", argv[0]);
     return -1;
   }
 
@@ -14,5 +17,8 @@ int main(int argc, char **argv) {
 
   vm.loadExecutable(argv[1]);
 
-  vm.runExecutable();
+  if (argc == 3)
+    vm.debugExecutable();
+  else
+    vm.runExecutable();
 }

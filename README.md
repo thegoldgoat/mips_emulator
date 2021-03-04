@@ -69,7 +69,7 @@ In the debugger CLI you have the following commands:
 
 1. b <address>: adds a breakpoint to the <address> instruction
 2. sb: shows the active breakpoints
-3. rm <address>: removes the breakpoint at <address>
+3. rb <address>: removes the breakpoint at <address>
 
 ### Flow
 
