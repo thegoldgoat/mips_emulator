@@ -115,6 +115,21 @@ void VirtualMachine::debugExecutable() {
         std::cin >> inputBuffer;
         if (debug_breakpoints.erase((uint32_t)std::stoi(inputBuffer)) == 0)
           throw std::runtime_error("Breakpoint not found");
+      } else if (inputBuffer == "c") {
+        debug_runUntilBreakpoint();
+      } else if (inputBuffer == "n") {
+        runCPUCycle();
+      } else if (inputBuffer == "pr") {
+        for (int i = 0; i < REGISTER_FILE_SIZE; i++) {
+          uint32_t regValue = registers.read(i);
+          printf("[%02d]: hex = %08x; dec = %d\n", i, regValue, regValue);
+        }
+      } else if (inputBuffer == "wr") {
+        throw std::runtime_error("Instruction not implemented");
+      } else if (inputBuffer == "pm") {
+        throw std::runtime_error("Instruction not implemented");
+      } else if (inputBuffer == "wm") {
+        throw std::runtime_error("Instruction not implemented");
       } else {
         throw std::runtime_error("Invalid command");
       }
