@@ -50,11 +50,45 @@ sudo ninja install
 
 ## Usage
 
-Warning: not completely working yet, there is no exit instruction so it will infinitely fetch instructions
-
 Run `emulator` to see CLI parameters:
 
-Usage: ./build/emulator <input_file>
+Usage: ./build/emulator <input_file> [--debug]
+
+## Debug
+
+To run a the VM in debugging mode, simply pass as second CLI parameter '--debug'
+
+In the debugger CLI you have the following commands:
+
+### Common
+
+1. r: runs the executable
+2. k: kills the process
+3. e: exit the debugger
+
+### Breakpoints
+
+1. b <address>: adds a breakpoint to the <address> instruction
+2. sb: shows the active breakpoints
+3. rm <address>: removes the breakpoint at <address>
+
+### Flow
+
+1. c: continues execution until breakpoint
+2. n: executes just one instruction
+
+### Registers
+
+1. pr: prints all registers values
+2. pr <reg>: prints <reg> register's value
+3. wr <reg>: writes <reg> register's value
+
+<reg> can either be the register number or mnemonic name
+
+### Memory
+
+1. pm <address>: print memory value at <address>
+2. wm <address>: writes memory value at <address>
 
 ## License
 
