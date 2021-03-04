@@ -56,15 +56,14 @@ Usage: ./build/emulator <input_file> [--debug]
 
 ## Debug
 
-To run a the VM in debugging mode, simply pass as second CLI parameter '--debug'
+To run the VM in debugging mode, simply pass '--debug' as second CLI parameter
 
 In the debugger CLI you have the following commands:
 
 ### Common
 
 1. r: runs the executable
-2. k: kills the process
-3. e: exit the debugger
+2. e: exit the debugger
 
 ### Breakpoints
 
