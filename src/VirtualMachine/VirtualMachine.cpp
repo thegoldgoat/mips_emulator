@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 #define TEXT_SEGMENT_START 0x00400000
 #define DATA_SEGMENT_START 0x10000000
@@ -94,7 +95,10 @@ void VirtualMachine::debugExecutable() {
   while (continueDebug) {
     std::cout << "> ";
     std::flush(std::cout);
-    std::cin >> inputBuffer;
+    std::getline(std::cin, inputBuffer);
+
+    std::stringstream lineBuffer(inputBuffer);
+    lineBuffer >> inputBuffer;
 
     try {
       if (inputBuffer == "r") {
@@ -103,7 +107,7 @@ void VirtualMachine::debugExecutable() {
       } else if (inputBuffer == "e") {
         continueDebug = false;
       } else if (inputBuffer == "b") {
-        std::cin >> inputBuffer;
+        lineBuffer >> inputBuffer;
 
         // TODO: check that std::stoi accepts 32 bit unsigned integer up to 2^32
         // -1
@@ -112,7 +116,10 @@ void VirtualMachine::debugExecutable() {
         for (auto &iterator : debug_breakpoints)
           printf("Breakpoint at %08x\n", iterator.first);
       } else if (inputBuffer == "rb") {
-        std::cin >> inputBuffer;
+        if (!lineBuffer.good())
+          throw std::runtime_error("Missing command parameter");
+
+        lineBuffer >> inputBuffer;
         if (debug_breakpoints.erase((uint32_t)std::stoi(inputBuffer)) == 0)
           throw std::runtime_error("Breakpoint not found");
       } else if (inputBuffer == "c") {
@@ -120,10 +127,28 @@ void VirtualMachine::debugExecutable() {
       } else if (inputBuffer == "n") {
         runCPUCycle();
       } else if (inputBuffer == "pr") {
-        for (int i = 0; i < REGISTER_FILE_SIZE; i++) {
-          uint32_t regValue = registers.read(i);
-          printf("[%02d]: hex = %08x; dec = %d\n", i, regValue, regValue);
+
+        if (lineBuffer.good()) {
+          int32_t registerNumber;
+          lineBuffer >> inputBuffer;
+
+          registerNumber = std::stoi(inputBuffer, nullptr, 0);
+
+          std::cout << "registerNumber = " << registerNumber << std::endl;
+
+          if (registerNumber < 0 || registerNumber > 31)
+            throw std::runtime_error("Invalid register number");
+
+          uint32_t regValue = registers.read(registerNumber);
+          printf("hex = %08x; dec = %d\n", regValue, regValue);
+
+        } else {
+          for (int i = 0; i < REGISTER_FILE_SIZE; i++) {
+            uint32_t regValue = registers.read(i);
+            printf("[%02d]: hex = %08x; dec = %d\n", i, regValue, regValue);
+          }
         }
+
       } else if (inputBuffer == "wr") {
         throw std::runtime_error("Instruction not implemented");
       } else if (inputBuffer == "pm") {
