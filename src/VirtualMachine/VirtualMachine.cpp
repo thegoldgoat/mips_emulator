@@ -134,8 +134,6 @@ void VirtualMachine::debugExecutable() {
 
           registerNumber = std::stoi(inputBuffer, nullptr, 0);
 
-          std::cout << "registerNumber = " << registerNumber << std::endl;
-
           if (registerNumber < 0 || registerNumber > 31)
             throw std::runtime_error("Invalid register number");
 
@@ -147,10 +145,29 @@ void VirtualMachine::debugExecutable() {
             uint32_t regValue = registers.read(i);
             printf("[%02d]: hex = %08x; dec = %d\n", i, regValue, regValue);
           }
+          printf("[PC]: %08x\n[HI]: %08x\n[LO]: %08x\n", registers.getPc(),
+                 registers.getHi(), registers.getLo());
         }
 
       } else if (inputBuffer == "wr") {
-        throw std::runtime_error("Instruction not implemented");
+        int32_t registerNumber;
+        uint32_t registerValue;
+
+        if (!lineBuffer.good())
+          throw std::runtime_error("Missing command parameter");
+        lineBuffer >> inputBuffer;
+        registerNumber = std::stoi(inputBuffer, nullptr, 0);
+
+        if (registerNumber < 0 || registerNumber > 31)
+          throw std::runtime_error("Invalid register number");
+
+        if (!lineBuffer.good())
+          throw std::runtime_error("Missing command parameter");
+        lineBuffer >> inputBuffer;
+        registerValue = std::stoi(inputBuffer, nullptr, 0);
+
+        registers.write(registerNumber, registerValue);
+
       } else if (inputBuffer == "pm") {
         throw std::runtime_error("Instruction not implemented");
       } else if (inputBuffer == "wm") {
