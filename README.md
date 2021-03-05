@@ -80,14 +80,14 @@ In the debugger CLI you have the following commands:
 
 1. pr: prints all registers values
 2. pr <reg>: prints <reg> register's value
-3. wr <reg>: writes <reg> register's value
+3. wr <reg> <value>: writes <reg> register's value
 
 <reg> can either be the register number or mnemonic name
 
 ### Memory
 
 1. pm <address>: print memory value at <address>
-2. wm <address>: writes memory value at <address>
+2. wm <address> <value>: writes memory value at <address>
 
 ## License
 

@@ -169,9 +169,36 @@ void VirtualMachine::debugExecutable() {
         registers.write(registerNumber, registerValue);
 
       } else if (inputBuffer == "pm") {
-        throw std::runtime_error("Instruction not implemented");
+        if (!lineBuffer.good())
+          throw std::runtime_error("Missing command parameter");
+        uint32_t memoryAddress;
+        lineBuffer >> inputBuffer;
+
+        memoryAddress = std::stoi(inputBuffer, nullptr, 0);
+
+        if (memoryAddress >= memory.size)
+          throw std::runtime_error("Memory address out of range");
+
+        printf("hex = %08x\n", memory.readWord(memoryAddress));
       } else if (inputBuffer == "wm") {
-        throw std::runtime_error("Instruction not implemented");
+        if (!lineBuffer.good())
+          throw std::runtime_error("Missing command parameter");
+        uint32_t memoryAddress;
+        lineBuffer >> inputBuffer;
+
+        memoryAddress = std::stoi(inputBuffer, nullptr, 0);
+
+        if (memoryAddress >= memory.size)
+          throw std::runtime_error("Memory address out of range");
+
+        if (!lineBuffer.good())
+          throw std::runtime_error("Missing command parameter");
+        uint32_t newValue;
+        lineBuffer >> inputBuffer;
+
+        newValue = std::stoi(inputBuffer, nullptr, 0);
+
+        memory.writeWord(memoryAddress, newValue);
       } else {
         throw std::runtime_error("Invalid command");
       }
@@ -187,7 +214,7 @@ void VirtualMachine::debug_runUntilBreakpoint() {
   do {
     auto result = debug_breakpoints.find(registers.getPc());
     if (result == debug_breakpoints.end()) {
-      this->runCPUCycle();
+      runCPUCycle();
     } else
       break;
   } while (continueExecution);
