@@ -16,8 +16,6 @@ public:
   Memory_t memory;
   Registers_t registers;
 
-  VirtualMachine(uint32_t memorySize) : memory(Memory_t(memorySize)) {}
-
   void loadExecutable(std::string path);
 
   void runExecutable();

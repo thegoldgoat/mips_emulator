@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  VirtualMachine vm = VirtualMachine((uint32_t)2 * 1024 * 1024 * 1024);
+  VirtualMachine vm;
 
   vm.loadExecutable(argv[1]);
 

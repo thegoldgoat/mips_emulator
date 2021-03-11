@@ -19,26 +19,32 @@ void VirtualMachine::loadExecutable(std::string path) {
   }
 
   ExeHeader header;
-  uint32_t intBuffer, currentAddress;
+  uint32_t intBuffer;
 
   inputFile.read((char *)&header, sizeof(header));
 
   entryPointAddress = header.entryPointOffset + TEXT_SEGMENT_START;
 
-  // Load text segment into memory
-  currentAddress = TEXT_SEGMENT_START;
-  for (uint32_t i = 0; i < header.textSegmentSize; i++) {
-    inputFile.read((char *)&intBuffer, sizeof(intBuffer));
-    memory.writeWord(currentAddress, intBuffer);
-    currentAddress += 4;
-  }
+  // Create VMA
+  memory.allocateVMAs(TEXT_SEGMENT_START, header.textSegmentSize,
+                      DATA_SEGMENT_START, header.dataSegmentSize);
+
+  char *segmentBasePointer = memory.getTextSegmentPointer();
 
   // Load text segment into memory
-  currentAddress = DATA_SEGMENT_START;
+  for (uint32_t i = 0; i < header.textSegmentSize; i++) {
+    inputFile.read((char *)&intBuffer, sizeof(intBuffer));
+    *(segmentBasePointer) = intBuffer;
+    segmentBasePointer += sizeof(uint32_t);
+  }
+
+  segmentBasePointer = memory.getDataSegmentPointer();
+
+  // Load text segment into memory
   for (uint32_t i = 0; i < header.dataSegmentSize; i++) {
     inputFile.read((char *)&intBuffer, sizeof(intBuffer));
-    memory.writeWord(currentAddress, intBuffer);
-    currentAddress += 4;
+    *(segmentBasePointer) = intBuffer;
+    segmentBasePointer += sizeof(uint32_t);
   }
 }
 
@@ -64,7 +70,7 @@ void VirtualMachine::runCPUCycle() {
   uint32_t fetchedInstruction;
 
   // Fetch Instruction
-  fetchedInstruction = memory.readWord(registers.getPc());
+  fetchedInstruction = memory.readInstruction(registers.getPc());
 
   // Decode
   Instruction_t decodedInstruction(fetchedInstruction);

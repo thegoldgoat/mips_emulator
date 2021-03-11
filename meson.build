@@ -9,6 +9,7 @@ executable('emulator', 'src/main.cpp',                 \
     'src/Instructions/Types/I_Instruction.cpp',        \
     'src/Instructions/Types/J_Instruction.cpp',        \
     'src/Memory/Memory.cpp',                           \
+    'src/Memory/VMA.cpp',                              \
     'src/Registers/Registers.cpp' ,                    \
     'src/VirtualMachine/VirtualMachine.cpp' ,          \
     install: true,
@@ -29,6 +30,7 @@ executable('mytest', 'test/test.cpp',                  \
     'src/Instructions/Types/I_Instruction.cpp',        \
     'src/Instructions/Types/J_Instruction.cpp',        \
     'src/Memory/Memory.cpp',                           \
+    'src/Memory/VMA.cpp',                              \
     'src/Registers/Registers.cpp',                     \
     'src/VirtualMachine/VirtualMachine.cpp' ,          \
 

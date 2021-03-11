@@ -24,6 +24,12 @@ This emulator will interpret a single instruction at a time:
 2. 3 32bit operation specific registers
 3. 2 GB RAM for text, static data, dynamic data and stack
 
+## Memory protection
+
+While parsing the input executable, which contains text and data segment sizes, create two Virtual Memory Areas and add them to the Memory Class
+
+During execution, the VirtualMachine class should notify the Memory class if the next read/write is for accessing .data/.text
+
 ## Compile
 
 Install dependencies first:
