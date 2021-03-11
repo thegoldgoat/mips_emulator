@@ -43,3 +43,10 @@ void Memory_t::allocateVMAs(uint32_t textBase, uint32_t textSize,
   textSegment.reset(new VMA(textBase, textSize, false, false, true));
   dataSegment.reset(new VMA(dataBase, dataSize, true, true, false));
 }
+
+void Memory_t::printDebugInfo() {
+  printf(".text: start = %08x; end = %08x\n", textSegment->base,
+         textSegment->base + textSegment->size);
+  printf(".data: start = %08x; end = %08x\n", dataSegment->base,
+         dataSegment->base + dataSegment->size);
+}

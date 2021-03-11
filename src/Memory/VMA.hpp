@@ -17,11 +17,12 @@ public:
 
   char *getBasePointer();
 
-private:
   // base address
   uint32_t base = 0;
   // Size of the area
   uint32_t size = 0;
+
+private:
   // Base pointer
   char *basePointer = nullptr;
 

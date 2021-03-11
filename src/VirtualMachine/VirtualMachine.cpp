@@ -26,8 +26,9 @@ void VirtualMachine::loadExecutable(std::string path) {
   entryPointAddress = header.entryPointOffset + TEXT_SEGMENT_START;
 
   // Create VMA
-  memory.allocateVMAs(TEXT_SEGMENT_START, header.textSegmentSize,
-                      DATA_SEGMENT_START, header.dataSegmentSize);
+  memory.allocateVMAs(
+      TEXT_SEGMENT_START, header.textSegmentSize * sizeof(uint32_t),
+      DATA_SEGMENT_START, header.dataSegmentSize * sizeof(uint32_t));
 
   char *segmentBasePointer = memory.getTextSegmentPointer();
 
@@ -207,6 +208,8 @@ void VirtualMachine::debugExecutable() {
         newValue = std::stoi(inputBuffer, nullptr, 0);
 
         memory.writeWord(memoryAddress, newValue);
+      } else if (inputBuffer == "vma") {
+        memory.printDebugInfo();
       } else {
         throw std::runtime_error("Invalid command");
       }

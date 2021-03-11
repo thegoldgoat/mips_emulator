@@ -21,6 +21,8 @@ public:
   char *getTextSegmentPointer() { return textSegment->getBasePointer(); }
   char *getDataSegmentPointer() { return dataSegment->getBasePointer(); }
 
+  void printDebugInfo();
+
 private:
   std::unique_ptr<VMA> textSegment;
   std::unique_ptr<VMA> dataSegment;

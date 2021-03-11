@@ -51,5 +51,7 @@ char *VMA::getBasePointer() {
     throw std::runtime_error(
         "VMA: Trying to get a VMA pointer while it was already locked");
 
+  pointerLocked = true;
+
   return basePointer;
 }

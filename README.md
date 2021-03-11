@@ -94,6 +94,7 @@ In the debugger CLI you have the following commands:
 
 1. pm <address>: print memory value at <address>
 2. wm <address> <value>: writes memory value at <address>
+3. vma: Prints all the vma sectors
 
 ## License
 
