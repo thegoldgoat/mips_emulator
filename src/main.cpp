@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  VirtualMachine vm;
+  VirtualMachine vm(argc == 3);
 
   vm.loadExecutable(argv[1]);
 

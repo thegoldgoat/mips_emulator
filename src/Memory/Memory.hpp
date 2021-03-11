@@ -5,25 +5,27 @@
 #include "VMA.hpp"
 
 #include <memory>
+#include <string>
+#include <vector>
 
 class Memory_t {
 public:
-  uint32_t size;
+  Memory_t(bool allowDebug) : allowDebug(allowDebug) {}
 
   uint32_t readInstruction(uint32_t address);
-
   uint32_t readWord(uint32_t offsetInByte);
   void writeWord(uint32_t offsetInByte, uint32_t word);
 
-  void allocateVMAs(uint32_t textBase, uint32_t textSize, uint32_t dataBase,
-                    uint32_t dataSize);
+  uint32_t debug_read(uint32_t address);
+  void debug_write(uint32_t offsetInByte, uint32_t word);
 
-  char *getTextSegmentPointer() { return textSegment->getBasePointer(); }
-  char *getDataSegmentPointer() { return dataSegment->getBasePointer(); }
-
+  void allocateVMAs(std::shared_ptr<VMA> &newVMA);
   void printDebugInfo();
 
 private:
-  std::unique_ptr<VMA> textSegment;
-  std::unique_ptr<VMA> dataSegment;
+  std::vector<std::shared_ptr<VMA>> vmaSegments;
+
+  bool allowDebug;
+
+  VMA *getVMAForAddress(uint32_t address);
 };

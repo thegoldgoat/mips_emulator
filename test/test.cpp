@@ -3,7 +3,7 @@
 #include "Instructions/Memory.hpp"
 
 int main() {
-  VirtualMachine vm = VirtualMachine();
+  VirtualMachine vm = VirtualMachine(false);
 
   testAdd(vm);
   testSub(vm);

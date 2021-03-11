@@ -13,6 +13,8 @@ struct ExeHeader {
 
 class VirtualMachine {
 public:
+  VirtualMachine(bool allowDebug) : memory(allowDebug) {}
+
   Memory_t memory;
   Registers_t registers;
 

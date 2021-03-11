@@ -9,44 +9,50 @@
 #endif
 
 uint32_t Memory_t::readWord(uint32_t offsetInByte) {
-  if (textSegment->containsAddress(offsetInByte)) {
-    return textSegment->read(offsetInByte);
-  } else if (dataSegment->containsAddress(offsetInByte)) {
-    return dataSegment->read(offsetInByte);
-  } else {
-    throw std::runtime_error("Memory address is not contained within any VMA");
-  }
+  return getVMAForAddress(offsetInByte)->read(offsetInByte);
 }
 
 void Memory_t::writeWord(uint32_t offsetInByte, uint32_t word) {
-  if (textSegment->containsAddress(offsetInByte)) {
-    textSegment->write(offsetInByte, word);
-  } else if (dataSegment->containsAddress(offsetInByte)) {
-    dataSegment->write(offsetInByte, word);
-  } else {
-    throw std::runtime_error("Memory address is not contained within any VMA");
-  }
+  getVMAForAddress(offsetInByte)->write(offsetInByte, word);
 }
 
 uint32_t Memory_t::readInstruction(uint32_t address) {
-  if (textSegment->containsAddress(address)) {
-    return textSegment->readExecute(address);
-  } else if (dataSegment->containsAddress(address)) {
-    return dataSegment->readExecute(address);
-  } else {
-    throw std::runtime_error("Memory address is not contained within any VMA");
-  }
+  return getVMAForAddress(address)->readExecute(address);
 }
 
-void Memory_t::allocateVMAs(uint32_t textBase, uint32_t textSize,
-                            uint32_t dataBase, uint32_t dataSize) {
-  textSegment.reset(new VMA(textBase, textSize, false, false, true));
-  dataSegment.reset(new VMA(dataBase, dataSize, true, true, false));
+void Memory_t::allocateVMAs(std::shared_ptr<VMA> &newVMA) {
+  vmaSegments.push_back(newVMA);
 }
+
+#define ASSERT_DEBUG_ALLOWED                                                   \
+  if (!allowDebug)                                                             \
+  throw std::runtime_error(                                                    \
+      "Trying to print debug values while debug was disabled")
 
 void Memory_t::printDebugInfo() {
-  printf(".text: start = %08x; end = %08x\n", textSegment->base,
-         textSegment->base + textSegment->size);
-  printf(".data: start = %08x; end = %08x\n", dataSegment->base,
-         dataSegment->base + dataSegment->size);
+  ASSERT_DEBUG_ALLOWED;
+
+  for (auto &iterator : vmaSegments)
+    printf("%s: start = %08x; end = %08x\n", iterator->name.c_str(),
+           iterator->base, iterator->base + iterator->size);
+}
+
+uint32_t Memory_t::debug_read(uint32_t address) {
+  ASSERT_DEBUG_ALLOWED;
+
+  return getVMAForAddress(address)->debug_read(address);
+}
+
+void Memory_t::debug_write(uint32_t offsetInByte, uint32_t word) {
+  ASSERT_DEBUG_ALLOWED;
+
+  getVMAForAddress(offsetInByte)->debug_write(offsetInByte, word);
+}
+
+VMA *Memory_t::getVMAForAddress(uint32_t address) {
+  for (auto &iterator : vmaSegments)
+    if (iterator->containsAddress(address))
+      return &(*iterator);
+
+  throw std::runtime_error("Memory address is not contained within any VMA");
 }

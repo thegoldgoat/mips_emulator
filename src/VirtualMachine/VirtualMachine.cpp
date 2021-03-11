@@ -7,6 +7,8 @@
 #include <iostream>
 #include <sstream>
 
+#include "../Memory/VMA.hpp"
+
 #define TEXT_SEGMENT_START 0x00400000
 #define DATA_SEGMENT_START 0x10000000
 
@@ -26,26 +28,37 @@ void VirtualMachine::loadExecutable(std::string path) {
   entryPointAddress = header.entryPointOffset + TEXT_SEGMENT_START;
 
   // Create VMA
-  memory.allocateVMAs(
-      TEXT_SEGMENT_START, header.textSegmentSize * sizeof(uint32_t),
-      DATA_SEGMENT_START, header.dataSegmentSize * sizeof(uint32_t));
+  std::shared_ptr<VMA> text =
+      std::make_shared<VMA>(TEXT_SEGMENT_START, header.textSegmentSize * 4,
+                            ".text", false, false, true);
 
-  char *segmentBasePointer = memory.getTextSegmentPointer();
+  std::shared_ptr<VMA> data =
+      std::make_shared<VMA>(DATA_SEGMENT_START, header.dataSegmentSize * 4,
+                            ".data", true, true, false);
+
+  std::shared_ptr<VMA> stack = std::make_shared<VMA>(
+      0x7ffffffc - 0x800000, 0x800000, ".stck", true, true, false);
+
+  memory.allocateVMAs(text);
+  memory.allocateVMAs(data);
+  memory.allocateVMAs(stack);
+
+  uint32_t *segmentBasePointer = (uint32_t *)text->getBasePointer();
 
   // Load text segment into memory
   for (uint32_t i = 0; i < header.textSegmentSize; i++) {
     inputFile.read((char *)&intBuffer, sizeof(intBuffer));
     *(segmentBasePointer) = intBuffer;
-    segmentBasePointer += sizeof(uint32_t);
+    segmentBasePointer++;
   }
 
-  segmentBasePointer = memory.getDataSegmentPointer();
+  segmentBasePointer = (uint32_t *)data->getBasePointer();
 
   // Load text segment into memory
   for (uint32_t i = 0; i < header.dataSegmentSize; i++) {
     inputFile.read((char *)&intBuffer, sizeof(intBuffer));
     *(segmentBasePointer) = intBuffer;
-    segmentBasePointer += sizeof(uint32_t);
+    segmentBasePointer++;
   }
 }
 
@@ -61,8 +74,8 @@ void VirtualMachine::initRegisters() {
   registers.write(GLOBAL_POINTER, 0x10008000);
 
   // Stack pointer & Frame pointer
-  registers.write(STACK_POINTER, memory.size - 4);
-  registers.write(FRAME_POINTER, memory.size - 4);
+  registers.write(STACK_POINTER, 0x7ffffffc);
+  registers.write(FRAME_POINTER, 0x7ffffffc);
 }
 
 void VirtualMachine::stopExecution() { continueExecution = false; }
@@ -98,6 +111,7 @@ void VirtualMachine::debugExecutable() {
 
   initRegisters();
 
+  memory.debug_read(0x00400000);
   std::string inputBuffer;
   bool continueDebug = true;
 
@@ -185,10 +199,10 @@ void VirtualMachine::debugExecutable() {
 
         memoryAddress = std::stoi(inputBuffer, nullptr, 0);
 
-        if (memoryAddress >= memory.size)
+        if (memoryAddress >= 0xffffffff)
           throw std::runtime_error("Memory address out of range");
 
-        printf("hex = %08x\n", memory.readWord(memoryAddress));
+        printf("hex = %08x\n", memory.debug_read(memoryAddress));
       } else if (inputBuffer == "wm") {
         if (!lineBuffer.good())
           throw std::runtime_error("Missing command parameter");
@@ -197,7 +211,7 @@ void VirtualMachine::debugExecutable() {
 
         memoryAddress = std::stoi(inputBuffer, nullptr, 0);
 
-        if (memoryAddress >= memory.size)
+        if (memoryAddress >= 0xffffffff)
           throw std::runtime_error("Memory address out of range");
 
         if (!lineBuffer.good())
@@ -207,7 +221,7 @@ void VirtualMachine::debugExecutable() {
 
         newValue = std::stoi(inputBuffer, nullptr, 0);
 
-        memory.writeWord(memoryAddress, newValue);
+        memory.debug_write(memoryAddress, newValue);
       } else if (inputBuffer == "vma") {
         memory.printDebugInfo();
       } else {
