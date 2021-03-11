@@ -21,14 +21,17 @@ This emulator will interpret a single instruction at a time:
 ## Memory and registers
 
 1. 32 32bit accessible registers
-2. 3 32bit operation specific registers
-3. 2 GB RAM for text, static data, dynamic data and stack
+2. 3 32bit operation specific registers ($pc, $hi, $Lo)
+3. 2 GB virtual RAM:
+   1. text segment allocated automatically based on input file text segment size
+   2. data segment allocated automatically based on input file data segment size
+   3. stack segment from 0x7ffffffc to 8MB down (0x7f7ffffc)
 
 ## Memory protection
 
-While parsing the input executable, which contains text and data segment sizes, create two Virtual Memory Areas and add them to the Memory Class
+While parsing the input executable, which contains text and data segment sizes, create two Virtual Memory Areas
 
-During execution, the VirtualMachine class should notify the Memory class if the next read/write is for accessing .data/.text
+Create also a static 8MB stack VMA
 
 ## Compile
 
