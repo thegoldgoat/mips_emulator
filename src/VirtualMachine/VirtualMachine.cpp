@@ -89,6 +89,8 @@ void VirtualMachine::runExecutable() {
 
 void VirtualMachine::debugExecutable() {
 
+  initRegisters();
+
   std::string inputBuffer;
   bool continueDebug = true;
 
